@@ -10988,6 +10988,7 @@ h5,
 
 .heading-section {
 	font-size: 28px;
+	font-family: Merriweather;
 	color: #fff;
 }
 
@@ -11217,4 +11218,43 @@ textarea.form-control {
 	border: 1px solid transparent;
 	background: #fbceb5;
 	color: #fff;
+}.btn-primary {
+	​​ color: #fff;
+	background-color: #3a75f4;
+	border-color: #3a75f4;
+}
+
+​​.btn-primary:hover {
+	​​ color: #fff;
+	background-color: #1651f2;
+	border-color: #1651f2;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+	color: #fff;
+	background-color: #1651f2;
+	border-color: #1651f2;
+	box-shadow: 0 0 0 0.2rem rgba(88, 130, 246, 0.5);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+	color: #fff;
+	background-color: #3a8bf4;
+	border-color: #3a8bf4;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle {
+	color: #fff;
+	background-color: #0d2fee;
+	border-color: #0d2fee;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 0.2rem rgba(88, 138, 246, 0.5);
 }
