@@ -35,6 +35,7 @@
 		Elements
 		Grade
 		Departement 
+		popup : vacation
 	Garde
 	Departement
 	Etudiant +
@@ -43,6 +44,6 @@
 	Niveau
 	Formations
 		Modules | Elements 
-	Modules : Elements 
+	Modules : Elements : Nombre Des Heures , jours ,   
 		+ : Enseignant 
 	Bug report
