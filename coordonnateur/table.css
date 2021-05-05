@@ -1,0 +1,69 @@
+    table.my-table {
+        font-family: Calibri;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #3e5569;
+    vertical-align: top;
+    border-color: #e9ecef;
+        border: 2px solid #CCC;
+    border-collapse: collapse;
+    }
+
+    table.my-table th{
+    color: #303e4b;
+    }
+    
+    .my-table td {
+        padding: 8px;
+        margin: 0px;
+        border: 1px solid #CCC;
+        margin: 10px;
+    }
+    
+    .td-input{
+        padding: 0px !important;
+        margin: 0px;
+        border: 1px solid #CCC;
+        margin-left: 3px;
+    }
+    
+    .my-table th {
+        margin: 10px;
+        color: #3e5569;
+        font-weight: bold;
+            padding: 8px;
+    font-size: 18px;
+    }
+    
+    .tr-cat {
+        color: #314353;
+        font-weight: bold;
+    }
+    .my-table tr:not(:first-child):hover {background-color:#f7f7f7;}
+    
+    input[type=text] {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+        }
+    
+    input[type=text]:focus {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+        border: none;
+    outline: none;
+    }
+
+    .my-table-bordred>tbody>tr>td, .my-table-bordred>tbody>tr>th, .my-table-bordred>tfoot>tr>td, .my-table-bordred>tfoot>tr>th, .my-table-bordred>thead>tr>td, .my-table-bordred>thead>tr>th {
+        padding: 10px;
+    }
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #00D;
+    cursor: default;
+    background-color: #fff;
+    border: 3px solid #ddd;
+    border-bottom-color: transparent;
+}
