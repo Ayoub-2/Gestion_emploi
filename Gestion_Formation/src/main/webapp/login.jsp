@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -6,10 +8,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="css/login-style.css">
       <style type="text/css"></style>
    </head>
-   <body class="img js-fullheight" style="background-image: url(&quot;../assets/img/image-bg.jpg&quot;); height: 828px;">
+   <body class="img js-fullheight" style="background-image: url(&quot;./assets/img/bg-masthead.jpg&quot;); height: 828px;">
       <section class="ftco-section">
          <div class="container bag">
          	<div>
