@@ -8346,3 +8346,16 @@ textarea.form-control {
         border: 1px solid transparent;
         background: #fbceb5;
         color: #fff; }
+
+
+.bag {
+background-color: rgba(11, 30, 58, 0.726);
+width: 540px;
+}
+
+@media only screen and (max-width: 600px) {
+  .bag {
+	background-color: rgba(44 , 66 , 77 , 0);
+	width: 540px;
+	}
+}
