@@ -125,3 +125,10 @@ create table Rubrique(
 	constraint PK_RUB primary key(ID),
 	constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
 );
+CREATE TABLE users (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  nom varchar(255) DEFAULT NULL,
+  pass varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY nom (nom)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

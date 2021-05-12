@@ -11,7 +11,7 @@ public class LoginDao {
 	private String jdbcURL = "jdbc:mysql://localhost:3307/programmeemploi";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "root";
-	private static final String SELECT_USER = "select nom from users where nom=? and pass=?";
+	private static final String SELECT_USER = "SELECT id FROM users WHERE nom=? and pass=MD5(?);";
 	/*
 	private static final String SELECT_ALL_USERS = "select * from users";
 	private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
@@ -41,7 +41,7 @@ public class LoginDao {
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER);
 			preparedStatement.setString(1,u);
 			preparedStatement.setString(2,p);
-			
+			System.out.println(preparedStatement.toString());
 			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.next()) return true ;
