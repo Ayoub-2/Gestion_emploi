@@ -9,12 +9,12 @@
     <meta name="description" content="">
     <meta name="robots" content="noindex,nofollow">
     <title>Comptable</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <link href="dist/css/table.css" rel="stylesheet">
-    <link href="dist/css/navbar.css" rel="stylesheet">
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
+    <link href="../dist/css/table.css" rel="stylesheet">
+    <link href="../dist/css/navbar.css" rel="stylesheet">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -29,14 +29,14 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.jsp">
                         <b class="logo-icon">
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                         </b>
                         <span class="logo-text">
-                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
                         </span>
                     </a>
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
@@ -54,7 +54,7 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
@@ -72,7 +72,7 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                         <h5 class="m-b-0 user-name font-medium">Nom <i class=""></i></h5>
                                         <span class="op-5 user-content">Rôle</span>
@@ -80,23 +80,23 @@
                             </div>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                            href="index.jsp" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                 class="hide-menu">Tableau de bord</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="comptable-profil.html" aria-expanded="false"><i
+                            href="comptable-profil.jsp" aria-expanded="false"><i
                                 class="mdi mdi-account"></i><span class="hide-menu">Profile</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="comptable-table-emploi.html" aria-expanded="false"><i class="mdi mdi-table"></i><span
+                            href="comptable-table-emploi.jsp" aria-expanded="false"><i class="mdi mdi-table"></i><span
                                 class="hide-menu">Table d'emploi</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="comptable-etudiant.html" aria-expanded="false"><i class="mdi mdi-school"></i><span
+                            href="comptable-etudiant.jsp" aria-expanded="false"><i class="mdi mdi-school"></i><span
                                 class="hide-menu">Etudiants</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="comptable-enseignant.html" aria-expanded="false"><i class="mdi mdi-human-greeting"></i><span
+                            href="comptable-enseignant.jsp" aria-expanded="false"><i class="mdi mdi-human-greeting"></i><span
                                 class="hide-menu">Enseignants</span></a></li>
                     </ul>
                 </nav>
@@ -107,8 +107,8 @@
             <div class="row col-auto m-l-10">
                 <nav class="navbar navbar-custom navbar-expand-md">
                     <ul class="navbar-nav">
-                            <li class="nav-item "><a class="nav-link" href="comptable-table-emploi.html">Formation 1</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="comptable-table-emploi-form-1.html">Formation 2</a></li>
+                            <li class="nav-item "><a class="nav-link" href="comptable-table-emploi.jsp">Formation 1</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="comptable-table-emploi-form-1.jsp">Formation 2</a></li>
                     </ul>
                 </nav>
             </div>
@@ -277,12 +277,12 @@
             </div>
         </div>
     </div>
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/js/app-style-switcher.js"></script>
-    <script src="dist/js/waves.js"></script>
-    <script src="dist/js/sidebarmenu.js"></script>
-    <script src="dist/js/custom.js"></script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist/js/app-style-switcher.js"></script>
+    <script src="../dist/js/waves.js"></script>
+    <script src="../dist/js/sidebarmenu.js"></script>
+    <script src="../dist/js/custom.js"></script>
 </body>
 
 </html>
