@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LoginDao {
@@ -27,12 +25,13 @@ public class LoginDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+			System.out.println("Connected");
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Connected");
 		return connection;
 	}
 	public boolean validate(String u , String p) {
@@ -51,6 +50,7 @@ public class LoginDao {
 			printSQLException(e);
 			return false ;
 		}  catch(Exception e ) {
+			System.out.println("ERRRRRRRRRRRRRRRR") ;
 			System.out.println(e);
 			return false ;
 		}

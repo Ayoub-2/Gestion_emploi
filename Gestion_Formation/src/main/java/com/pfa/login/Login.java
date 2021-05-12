@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;  
 
-@WebServlet("/login1")
+@WebServlet("/login")
 public class Login extends HttpServlet { 
 public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException {  
@@ -19,13 +19,14 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
           
     String u=request.getParameter("username");
     String p=request.getParameter("userpass");
-    System.out.println("user " + u + "pass : " + p);
-    if((new LoginDao()).validate(u, p)){  
+    System.out.println("user :" + u + "\npass :" + p);
+    boolean result = new LoginDao().validate(u, p);
+    if(result){  
     	System.out.println("Hello , Post received") ;
     	response.sendRedirect("./admin/index.html"); 
     }  
     else{  
-        System.out.print("Sorry username or password error");  
+        System.out.println("Sorry username or password error");  
         RequestDispatcher rd=request.getRequestDispatcher("index.html");  
         rd.include(request,response);
     }  
