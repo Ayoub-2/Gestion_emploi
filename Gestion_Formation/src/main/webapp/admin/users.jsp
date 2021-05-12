@@ -9,9 +9,9 @@
     <meta name="description" content="">
     <meta name="robots" content="noindex,nofollow">
     <title>PFA</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link href="../dist/css/style.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,14 +31,14 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.jsp">
                         <b class="logo-icon">
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                         </b>
                         <span class="logo-text">
-                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
                         </span>
                     </a>
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
@@ -57,10 +57,10 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="profile.html"><i class="ti-user m-r-5 m-l-5"></i>
+                                <a class="dropdown-item" href="profile.jsp"><i class="ti-user m-r-5 m-l-5"></i>
                                     Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
                                     Logout</a>
@@ -76,7 +76,7 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="#" class="" id="Userdd" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">Steave Jobs <i
@@ -86,22 +86,22 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                href="index.jsp" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Tableau de bord</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="profile.html" aria-expanded="false"><i
+                                href="profile.jsp" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Profile</span></a></li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="users.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
+                                href="users.jsp" aria-expanded="false"><i class="mdi mdi-face"></i><span
                                     class="hide-menu">Utilsateurs</span></a></li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="roles.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
+                                href="roles.jsp" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
                                     class="hide-menu">Roles</span></a></li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="report.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
+                                href="report.jsp" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
                                     class="hide-menu">Bug Report</span></a></li>
                     </ul>
 
@@ -342,16 +342,16 @@
             </footer>
         </div>
     </div>
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/js/app-style-switcher.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist/js/app-style-switcher.js"></script>
     <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
+    <script src="../dist/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="dist/js/custom.js"></script>
+    <script src="../dist/js/custom.js"></script>
     <script type="text/javascript">
     $('.nav-tabs a[href="#u1"]').tab('show')
     $('.nav-tabs a').click(function(){
