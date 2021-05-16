@@ -302,15 +302,15 @@ insert into niveau values(3, "3A");
 
 --insert into enseignant values(ID, ID_niv, nom, prenom, 		email, 		genre, 		adresse);
 
-insert into enseignant values(10001, 1, "Mohammed", "Boubekri", "mohammed.boubekri@mail.com", "masculin", "adresse");
-insert into enseignant values(10002, 1, "Salma", "Ajaoued", 	"Salma.Ajaoued@mail.com", "Feminin", "adresse");
-insert into enseignant values(10003, 3, "Naima", "Naji", 		"Naima.Naji@mail.com", "Feminin", "adresse");
-insert into enseignant values(10004, 1, "Najat", "Hassoun", 	"Najat.Hassoun@mail.com", "Feminin", "adresse");
-insert into enseignant values(10005, 2, "Hamza", "Ait Baha", 	"Hamza.AitBaha@mail.com", "masculin", "adresse");
-insert into enseignant values(10006, 2, "Kamal", "Bouzekri", 	"Kamal.Bouzekri@mail.com", "masculin", "adresse");
-insert into enseignant values(10007, 1, "Rabab", "Ben Sliman", 	"Rabab.BenSliman@mail.com", "Feminin", "adresse");
-insert into enseignant values(10011, 3, "Kaoutar", "Aarab", 	"Kaoutar.Aarab@mail.com", "Feminin", "adresse");
-insert into enseignant values(10022, 1, "Ayoub", "Bouallal", 	"Ayoub.Bouallal@mail.com", "masculin", "adresse");
-insert into enseignant values(10010, 2, "Hamza", "Boukacha", 	"Hamza.Boukacha@mail.com", "masculin", "adresse");
-insert into enseignant values(10008, 1, "Jihad", "Slimani", 	"Jihad.Slimani@mail.com", "Feminin", "adresse");
-insert into enseignant values(10009, 2, "Amal", "Benjebour", 	"Amal.Benjebour@mail.com", "Feminin", "adresse");
+insert into etudiant values(10001, 1, "Mohammed", "Boubekri", "mohammed.boubekri@mail.com", "masculin", "adresse");
+insert into etudiant values(10002, 1, "Salma", "Ajaoued", 	"Salma.Ajaoued@mail.com", "Feminin", "adresse");
+insert into etudiant values(10003, 3, "Naima", "Naji", 		"Naima.Naji@mail.com", "Feminin", "adresse");
+insert into etudiant values(10004, 1, "Najat", "Hassoun", 	"Najat.Hassoun@mail.com", "Feminin", "adresse");
+insert into etudiant values(10005, 2, "Hamza", "Ait Baha", 	"Hamza.AitBaha@mail.com", "masculin", "adresse");
+insert into etudiant values(10006, 2, "Kamal", "Bouzekri", 	"Kamal.Bouzekri@mail.com", "masculin", "adresse");
+insert into etudiant values(10007, 1, "Rabab", "Ben Sliman", 	"Rabab.BenSliman@mail.com", "Feminin", "adresse");
+insert into etudiant values(10011, 3, "Kaoutar", "Aarab", 	"Kaoutar.Aarab@mail.com", "Feminin", "adresse");
+insert into etudiant values(10022, 1, "Ayoub", "Bouallal", 	"Ayoub.Bouallal@mail.com", "masculin", "adresse");
+insert into etudiant values(10010, 2, "Hamza", "Boukacha", 	"Hamza.Boukacha@mail.com", "masculin", "adresse");
+insert into etudiant values(10008, 1, "Jihad", "Slimani", 	"Jihad.Slimani@mail.com", "Feminin", "adresse");
+insert into etudiant values(10009, 2, "Amal", "Benjebour", 	"Amal.Benjebour@mail.com", "Feminin", "adresse");
