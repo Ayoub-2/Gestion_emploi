@@ -1,3 +1,58 @@
+
+create table Rubrique(
+	ID 				SMALLINT,
+	-- ID_PEmp 			SMALLINT,
+	Libelle 			varchar(512),
+	constraint PK_RUB primary key(ID)
+	-- constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
+);
+create table Niveau(
+	ID  SMALLINT,
+	nom varchar(30),
+	constraint PK_NIV primary key(ID)
+);
+
+create table paiement(
+	ID 		SMALLINT,
+	montantVerse 	DECIMAL(5,3),
+	recu 		VARCHAR(512) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
+	observation 	varchar(200),
+	constraint PK_PAIEMENT primary key(ID)
+);
+
+create table Vacation(
+	ID   				SMALLINT,
+	ID_ENS 				SMALLINT,
+	taux 				DECIMAL(3,3),
+	taxImpotRevenu 			DECIMAL(3,3),
+	jour 				Date,
+	montant 			DECIMAL(5,3),
+	montantBrutArrandi 		DECIMAL(5,3),
+	IR 				DECIMAL(3,3),
+	IR_arrandi 			DECIMAL(3,3),
+	net 				DECIMAL(5,3),
+	constraint PK_VAC primary key(ID)
+);
+
+create table Departement(
+	ID  SMALLINT,
+	nom varchar(30),
+	constraint PK_GRADE primary key(ID)
+);
+
+create table Grade(
+	ID  SMALLINT,
+	nom varchar(30),
+	constraint PK_GRADE primary key(ID)
+);
+
+create table Formation(
+	ID 					SMALLINT,
+	nom 			varchar(30),
+	constraint PK_Form primary key(ID)
+);
+
+-- ================================ With constraint foreign keys 
 create table Etudiant(
 	ID  		SMALLINT,
 	ID_niv 		SMALLINT,
@@ -10,18 +65,26 @@ create table Etudiant(
 	constraint 	FK_ETUD_NIV foreign key(ID_niv) references Niveau(ID)
 );
 
-create table Niveau(
-	ID  SMALLINT,
-	nom varchar(30),
-	constraint PK_NIV primary key(ID)
+create table module(
+	ID  		SMALLINT,
+	ID_FORM 	SMALLINT,
+	nom 		varchar(256),
+	constraint PK_MOD primary key(ID),
+	constraint FK_MOD_FORM foreign key(ID_FORM) references Formation(ID)
 );
-
-create table paiement(
-	ID 				SMALLINT,
-	montantVerse 	DECIMAL(5,3),
-	recu 			VARCHAR(512) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-	observation 	varchar(200),
-	constraint PK_PAIEMENT primary key(ID)
+create table Enseignant(
+	ID  		SMALLINT,
+	ID_grade 	SMALLINT,
+	ID_Dep 		SMALLINT,
+	ID_vac 		SMALLINT,
+	nom 		varchar(30),
+	prenom 		varchar(30),
+	email  		varchar(50),
+	type  		varchar(20),
+	salaire  	DECIMAL(6,3),
+	constraint PK_ENS primary key(ID),
+	constraint FK_ENS_GRADE foreign key(ID_grade) references Grade(ID),
+	constraint FK_ENS_DEP foreign key(ID_Dep) references Departement(ID)
 );
 
 create table Inscription(
@@ -47,68 +110,11 @@ create table Element(
 	constraint FK_ELEM_MOD foreign key(ID_MODULE) references module(ID)
 );
 
-create table Vacation(
-	ID   				SMALLINT,
-	ID_ENS 				SMALLINT,
-	taux 				DECIMAL(3,3),
-	taxImpotRevenu 		DECIMAL(3,3),
-	jour 				Date,
-	montant 			DECIMAL(5,3),
-	montantBrutArrandi 	DECIMAL(5,3),
-	IR 					DECIMAL(3,3),
-	IR_arrandi 			DECIMAL(3,3),
-	net 				DECIMAL(5,3),
-	constraint PK_VAC primary key(ID)
-);
 ALTER TABLE Vacation
 ADD CONSTRAINT FK_VAC_ENS foreign key(ID_ENS) references Enseignant(ID);
-
-create table module(
-	ID  		SMALLINT,
-	ID_FORM 	SMALLINT,
-	nom 		varchar(256),
-	constraint PK_MOD primary key(ID),
-	constraint FK_MOD_FORM foreign key(ID_FORM) references Formation(ID)
-);
-
-create table Enseignant(
-	ID  		SMALLINT,
-	ID_grade 	SMALLINT,
-	ID_Dep 		SMALLINT,
-	ID_vac 		SMALLINT,
-	nom 		varchar(30),
-	prenom 		varchar(30),
-	email  		varchar(50),
-	type  		varchar(20),
-	salaire  	DECIMAL(6,3),
-	constraint PK_ENS primary key(ID),
-	constraint FK_ENS_GRADE foreign key(ID_grade) references Grade(ID),
-	constraint FK_ENS_DEP foreign key(ID_Dep) references Departement(ID)
-);
 alter table Enseignant
 ADD constraint FK_ENS_VAC foreign key(ID_vac) references Vacation(ID);
-
-create table Departement(
-	ID  SMALLINT,
-	nom varchar(30),
-	constraint PK_GRADE primary key(ID)
-);
-
-create table Grade(
-	ID  SMALLINT,
-	nom varchar(30),
-	constraint PK_GRADE primary key(ID)
-);
-
 --=======================================
-
-create table Rubrique(
-	ID 					SMALLINT,
-	--ID_PEmp 			SMALLINT,
-	Libelle 			varchar(512),
-	constraint PK_RUB primary key(ID),
-	--constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
-);
 
 create table ProgrammeEmp(
 	ID 					SMALLINT,
@@ -118,25 +124,18 @@ create table ProgrammeEmp(
 	Exercice 			date,
 	constraint PK_Rub primary key(ID),
 	constraint FK_PEmp_Form foreign key(ID_FORM) references Formation(ID),
-	constraint unique_format_exer UNIQUE(ID_FORM, Exercice);
+	constraint unique_format_exer UNIQUE(ID_FORM, Exercice)
 );
 
 create table sortie(
 	ID_Rub 						INT,
 	ID_PEmp 					SMALLINT,
-	Date_sortie 				date,
+	Date_sortie 					date,
 	montant 					DECIMAL(10,4),
 	constraint PK_SORT primary key(ID_Rub,ID_PEmp),
 	constraint FK_SORT_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID),
 	constraint FK_SORT_Rub foreign key(ID_Rub) references Rubrique(ID)
 );
-
-create table Formation(
-	ID 					SMALLINT,
-	nom 			varchar(30),
-	constraint PK_Form primary key(ID),
-);
-
 --======================== INSERT Rubriques
 
 insert into rubrique values(9111009, "Personnel");
@@ -218,7 +217,7 @@ insert into rubrique values(9111186, "Prélèvement 10% ENSIAS");
 insert into rubrique values(9111187, "Prélèvement 10% Présidence");
 insert into rubrique values(9111190, "Crédit à  programmer");
 
--- test inserts into enseignant
+-- test inserts into grade
 
 insert into grade values(1, "A");
 insert into grade values(2, "B");
@@ -298,6 +297,11 @@ insert into element(ID_MODULE, ID_ENS, ID, nom) values(16, 1004, 32,"Projet de f
 insert into niveau values(1, "1A");
 insert into niveau values(2, "2A");
 insert into niveau values(3, "3A");
+
+-- insert departement 
+insert into departement  values(1, "Economie");
+insert into departement values(2, "Recherche Operationnel");
+insert into departement values(3, "Reseau");
 
 
 --insert into enseignant values(ID, ID_niv, nom, prenom, 		email, 		genre, 		adresse);

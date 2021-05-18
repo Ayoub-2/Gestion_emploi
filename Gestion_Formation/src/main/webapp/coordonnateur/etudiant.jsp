@@ -1,3 +1,10 @@
+
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.pfa.connectionProvide.*" %>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -202,7 +209,7 @@
                   <div class="modal-content">
                   
                     <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Modifier Données Etudiant</h4>
+                      <h4 class="modal-title mb-3">Modifier DonnÃ©es Etudiant</h4>
                     </div>
                     
                     <div class="modal-body">
@@ -290,42 +297,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <%
+                                Connection con = (new ConnectionProvider()).getConnection();
+                    			PreparedStatement preparedStatement = con.prepareStatement("SELECT E.id , E.nom , prenom ,email ,N.nom, genre , null, adresse  FROM Etudiant E join Niveau N on N.id = E.id_niv ");
+                    			ResultSet rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                	%>
                                     <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
+                                        <td><%=rs.getInt(1)%></td>
+                                        <td><%= rs.getString(2)%></td>
+                                        <td><%= rs.getString(3)%></td>
+                                        <td><%= rs.getString(4)%></td>
+                                        <td><%= rs.getString(5)%></td>
+                                        <td><%= rs.getString(6)%></td>
+                                        <td><%= rs.getString(7)%></td>
+                                        <td><%= rs.getString(8)%></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#DelProf">delete</i></td>
                                     </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#DelProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateStudnent">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#DelStudnent">delete</i></td>
-                                    </tr>
+                                    <%
+                                    }%>
                                 </tbody>
                             </table>
                         </div>

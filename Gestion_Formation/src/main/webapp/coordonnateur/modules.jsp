@@ -1,3 +1,9 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.pfa.connectionProvide.*" %>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -212,7 +218,7 @@
                   <div class="modal-content">
                   
                     <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Modifier Données Etudiant</h4>
+                      <h4 class="modal-title mb-3">Modifier DonnÃ©es Etudiant</h4>
                     </div>
                     
                     <div class="modal-body">

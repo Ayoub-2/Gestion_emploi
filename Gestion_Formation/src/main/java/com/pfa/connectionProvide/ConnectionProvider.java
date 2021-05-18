@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionProvider {
-	private String jdbcURL = "jdbc:mysql://localhost:3308/programmeemploi?useUnicode=true&amp;characterEncoding=UTF-8";
+	private String jdbcURL = "jdbc:mysql://localhost:3307/programmeemploi?useUnicode=true&amp;characterEncoding=UTF-8";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "root";
 	public ConnectionProvider() {

@@ -20,8 +20,6 @@ public class LoginDao {
 			printSQLException(e);
 			return false ;
 		}  catch(Exception e ) {
-			System.out.println("ERRRRRRRRRRRRRRRR") ;
-			System.out.println(e);
 			return false ;
 		}
 	}
