@@ -1,4 +1,3 @@
-
 create table Rubrique(
 	ID 				SMALLINT,
 	-- ID_PEmp 			SMALLINT,
@@ -12,43 +11,39 @@ create table Niveau(
 	constraint PK_NIV primary key(ID)
 );
 
-create table paiement(
-	ID 		SMALLINT,
-	montantVerse 	DECIMAL(5,3),
-	recu 		VARCHAR(512) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-	observation 	varchar(200),
-	constraint PK_PAIEMENT primary key(ID)
-);
 
 create table Vacation(
 	ID   				SMALLINT,
 	ID_ENS 				SMALLINT,
-	taux 				DECIMAL(3,3),
-	taxImpotRevenu 			DECIMAL(3,3),
-	jour 				Date,
-	montant 			DECIMAL(5,3),
-	montantBrutArrandi 		DECIMAL(5,3),
-	IR 				DECIMAL(3,3),
-	IR_arrandi 			DECIMAL(3,3),
-	net 				DECIMAL(5,3),
+	ID_ELEM 			SMALLINT,
+	taux 				DECIMAL(9,3),
+	taxImpotRevenu 			DECIMAL(9,3),
+	montant 			DECIMAL(9,3),
+	montantBrutArrandi 		DECIMAL(9,3),
+	IR 				DECIMAL(9,3),
+	IR_arrandi 			DECIMAL(9,3),
+	net 				DECIMAL(9,3),
 	constraint PK_VAC primary key(ID)
 );
 
+
+
 create table Departement(
 	ID  SMALLINT,
-	nom varchar(30),
+	nom varchar(100),
 	constraint PK_GRADE primary key(ID)
 );
 
 create table Grade(
 	ID  SMALLINT,
-	nom varchar(30),
+	nom varchar(5),
 	constraint PK_GRADE primary key(ID)
 );
 
 create table Formation(
 	ID 					SMALLINT,
-	nom 			varchar(30),
+	nom 			varchar(50),
+	fraisFormation 		DECIMAL(10,3),
 	constraint PK_Form primary key(ID)
 );
 
@@ -59,7 +54,7 @@ create table Etudiant(
 	nom 		varchar(30),
 	prenom 		varchar(30),
 	email 		varchar(50),
-	genre  		char(10),
+	genre  		varchar(10),
 	adresse 	varchar(70),
 	constraint 	PK_ETUD primary key(ID),
 	constraint 	FK_ETUD_NIV foreign key(ID_niv) references Niveau(ID)
@@ -68,7 +63,7 @@ create table Etudiant(
 create table module(
 	ID  		SMALLINT,
 	ID_FORM 	SMALLINT,
-	nom 		varchar(256),
+	nom 		varchar(100),
 	constraint PK_MOD primary key(ID),
 	constraint FK_MOD_FORM foreign key(ID_FORM) references Formation(ID)
 );
@@ -81,7 +76,7 @@ create table Enseignant(
 	prenom 		varchar(30),
 	email  		varchar(50),
 	type  		varchar(20),
-	salaire  	DECIMAL(6,3),
+	salaire  	DECIMAL(9,3),
 	constraint PK_ENS primary key(ID),
 	constraint FK_ENS_GRADE foreign key(ID_grade) references Grade(ID),
 	constraint FK_ENS_DEP foreign key(ID_Dep) references Departement(ID)
@@ -90,51 +85,68 @@ create table Enseignant(
 create table Inscription(
 	ID_et  				SMALLINT,
 	ID_form  			SMALLINT,
-	ID_paiement  		SMALLINT,
-	fraisFormation 		DECIMAL(5,3),
 	anneeUniversitaire 	Date,
 	Niveau 				varchar(20),
-	constraint PK_INS primary key(ID_et, ID_form, ID_paiement),
+	constraint PK_INS primary key(ID_et, ID_form),
 	constraint FK_INS_FORM foreign key(ID_form) references formation(ID),
-	constraint FK_INS_ETUD foreign key(ID_et) references Etudiant(ID),
-	constraint FK_INS_PAIEMENT foreign key(ID_paiement) references Paiement(ID)
+	constraint FK_INS_ETUD foreign key(ID_et) references Etudiant(ID)
 );
+
+create table paiement(
+	ID 		SMALLINT,
+	montantVerse 	DECIMAL(10,3),
+	ID_INSCR_ET 	SMALLINT,
+	ID_INSCR_FORM 	SMALLINT,
+	recu 		VARCHAR(512) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
+	observation 	varchar(200),
+	constraint PK_PAIEMENT primary key(ID)
+);
+
+alter table paiement 
+add constraint FK_PAIEMENT_INSCR foreign key(ID_INSCR_ET,ID_INSCR_FORM) references Inscription(ID_et, ID_form);
 
 create table Element(
 	ID  		SMALLINT,
-	ID_ENS 		SMALLINT,
 	ID_MODULE 	SMALLINT,
-	nom 		varchar(30),
+	nom 		varchar(50),
 	constraint PK_ELEM primary key(ID),
-	constraint FK_ELEM_ENS foreign key(ID_ENS) references Enseignant(ID),
 	constraint FK_ELEM_MOD foreign key(ID_MODULE) references module(ID)
 );
 
 ALTER TABLE Vacation
 ADD CONSTRAINT FK_VAC_ENS foreign key(ID_ENS) references Enseignant(ID);
-alter table Enseignant
-ADD constraint FK_ENS_VAC foreign key(ID_vac) references Vacation(ID);
+
+ALTER TABLE Vacation
+add constraint FK_VAC_ELEM foreign key(ID_ELEM) references element(ID);
 --=======================================
 
 create table ProgrammeEmp(
 	ID 					SMALLINT,
 	ID_FORM 			SMALLINT NOT NULL,
+	ID_Responsable 		SMALLINT,
 	Intitule 			varchar(50),
-	Responsable 		varchar(30),
 	Exercice 			date,
 	constraint PK_Rub primary key(ID),
 	constraint FK_PEmp_Form foreign key(ID_FORM) references Formation(ID),
-	constraint unique_format_exer UNIQUE(ID_FORM, Exercice)
+	constraint FK_PEmp_RESPO foreign key(ID_Responsable) references enseignant(ID)
 );
 
 create table sortie(
 	ID_Rub 						INT,
 	ID_PEmp 					SMALLINT,
-	Date_sortie 					date,
+	Date_sortie 				date,
 	montant 					DECIMAL(10,4),
 	constraint PK_SORT primary key(ID_Rub,ID_PEmp),
 	constraint FK_SORT_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID),
 	constraint FK_SORT_Rub foreign key(ID_Rub) references Rubrique(ID)
+);
+
+create table Dates(
+	ID   			SMALLINT,
+	ID_VAC 			SMALLINT,
+	jour 			Date,
+	constraint PK_DATE primary key(ID),
+	constraint 	FK_DATE_VAC foreign key(ID_VAC) references vacation(ID)
 );
 --======================== INSERT Rubriques
 
@@ -174,7 +186,7 @@ insert into rubrique values(9111136, "Frais de participation aux foires et expos
 insert into rubrique values(9111137, "Publications et impressions");
 insert into rubrique values(9111140, "Aménagement, entretien et équipement");
 insert into rubrique values(9111141, "Agencement, aménagement et installation");
-insert into rubrique values(9111142, "Etudes liées à  la construction et à  l'aménagement des bàtiments administratifs");
+insert into rubrique values(9111142, "Etudes liées à  la construction et à  l'aménagement des bàtiments administratifs");
 insert into rubrique values(9111143, "Locations de bàtiments administratifs et charges connexes");
 insert into rubrique values(9111144, "Entretien et réparation des bàtiments pédagogiques et administratifs");
 insert into rubrique values(9111145, "Entretien et réparation du mobilier, du matériel de bureau et du matériel d'impression");
@@ -188,14 +200,14 @@ insert into rubrique values(9111156, "Achat d'animaux de laboratoire");
 insert into rubrique values(9111157, "Achat de produits pharmaceutiques");
 insert into rubrique values(9111158, "Achat de carburants et lubrifiants");
 insert into rubrique values(9111160, "Transports et déplacements");
-insert into rubrique values(9111161, "Frais de transport du personnel et des étudiants à  l'étranger");
-insert into rubrique values(9111162, "Frais de mission à  l'étranger des participants");
+insert into rubrique values(9111161, "Frais de transport du personnel et des étudiants à  l'étranger");
+insert into rubrique values(9111162, "Frais de mission à  l'étranger des participants");
 insert into rubrique values(9111163, "Frais de transport du personnel et des étudiants au Maroc");
 insert into rubrique values(9111164, "Frais de transport du mobilier et du matériel");
 insert into rubrique values(9111165, "Frais de transport et de séjour des missionnaires et chercheurs étrangers");
-insert into rubrique values(9111166, "Indemnités de déplacement à  l'intérieur du Royaume");
-insert into rubrique values(9111167, "Indemnités de déplacement à  l'intérieur du Royaume des nationaux et des non-résidents");
-insert into rubrique values(9111168, "Indemnités de mission à  l'étranger");
+insert into rubrique values(9111166, "Indemnités de déplacement à  l'intérieur du Royaume");
+insert into rubrique values(9111167, "Indemnités de déplacement à  l'intérieur du Royaume des nationaux et des non-résidents");
+insert into rubrique values(9111168, "Indemnités de mission à  l'étranger");
 insert into rubrique values(9111169, "Indemnités Klométriques");
 insert into rubrique values(9111170, "Matériel et mobilier");
 insert into rubrique values(9111171, "Achat de matériel d'enseignement");
@@ -215,7 +227,7 @@ insert into rubrique values(9111184, "Taxes postales et frais d'affranchissement
 insert into rubrique values(9111185, "Location de matériel de transport");
 insert into rubrique values(9111186, "Prélèvement 10% ENSIAS");
 insert into rubrique values(9111187, "Prélèvement 10% Présidence");
-insert into rubrique values(9111190, "Crédit à  programmer");
+insert into rubrique values(9111190, "Crédit à  programmer");
 
 -- test inserts into grade
 
