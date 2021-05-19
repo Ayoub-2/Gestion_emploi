@@ -4,6 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pfa.connectionProvide.*" %>
+<%
+Connection con ;
+PreparedStatement preparedStatement;
+ResultSet rs;
+%>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -122,6 +127,7 @@
                     </div>
                 </div>
             </div>
+<!-- Ajouter Professeur -->
 
             <div class="modal" id="AddProf">
                 <div class="modal-dialog">
@@ -144,9 +150,10 @@
                                 <div class="col-sm-6 p-r-0">
                                     <label class="col-12">Prenom</label>
                                     <input type="text" class="form-control form-control-line">
-                                </div>s
+                                </div>
                             </div>
                         </div>
+                        <br/>
                         <div class="form-group ">
                             <label for="example-email" class="col-md-12 ">Email</label>
                             <div class="col-sm-12">
@@ -168,7 +175,15 @@
                             <label class="col-sm-12 ">Element</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                 con = (new ConnectionProvider()).getConnection();
+                    			 preparedStatement = con.prepareStatement("SELECT nom FROM element ");
+                    			 rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                           </div>
@@ -176,7 +191,15 @@
                             <label class="col-sm-12 ">Departement</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM departement ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                           </div>
@@ -184,7 +207,15 @@
                             <label class="col-sm-12 ">Grade</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM grade ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                         </div>
@@ -210,7 +241,7 @@
                       
                   }
               </script>
-
+<!-- Modifier Professeur -->
             <div class="modal" id="UpdateProf">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -258,17 +289,57 @@
                             </div>
                           </div>
                         <div class="form-group">
-                            <label class="col-sm-12 ">Niveau</label>
+                            <label class="col-sm-12 ">Grade</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM grade ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-12 ">Departement</label>
+                            <div class="col-sm-12">
+                                <select class="form-select shadow-none form-control-line">
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM departement ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-12 ">Element</label>
+                            <div class="col-sm-12">
+                                <select class="form-select shadow-none form-control-line">
+                                <%
+                                 con = (new ConnectionProvider()).getConnection();
+                    			 preparedStatement = con.prepareStatement("SELECT nom FROM element ");
+                    			 rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
+                                </select>
+                            </div>
+                          </div>
+                        <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Valider</button>
+                                    <button class="btn btn-success text-white col-12" onclick="updateProf()">Valider</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -280,12 +351,7 @@
                   </div>
                 </div>
               </div>
-
-              <script>
-                  function addUser(){
-                      
-                  }
-              </script>
+<!-- Afficher professeurs -->
                 <div class="container-fluid">
                     <div class="col-12">
                          <div class="card" style="padding: 20px">
@@ -298,7 +364,6 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Type</th>
                                         <th scope="col">Salaire</th>
-                                        <th scope="col">Grade</th>
                                         <th scope="col">Matiere</th>
                                         <th scope="col">Departement</th>
                                         <th  class="col-1" colspan=2><center>Action </center></th>
@@ -306,21 +371,20 @@
                                 </thead>
                                 <tbody>
                                 <%
-                                Connection con = (new ConnectionProvider()).getConnection();
-                    			PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM enseignant");
-                    			ResultSet rs = preparedStatement.executeQuery();
+                                 con = (new ConnectionProvider()).getConnection();
+                    			 preparedStatement = con.prepareStatement("SELECT E.id , E.nom , prenom ,  email , type , G.nom , EL.nom , D.nom  FROM enseignant E join grade G on E.id_grade=G.id join vacation V on V.id_ens=E.id join element EL on v.id_elem=EL.id join departement D on D.id=E.id_dep  ");
+                    			 rs = preparedStatement.executeQuery();
                                 while (rs.next()) {
                                 %>
                                     <tr>
                                         <td><%=rs.getInt(1) %></td>
-                                        <td><%=rs.getInt(2) %></td>
-                                        <td><%=rs.getInt(3) %></td>
-                                        <td><%=rs.getInt(4) %></td>
+                                        <td><%=rs.getString(2) %></td>
+                                        <td><%=rs.getString(3) %></td>
+                                        <td><%=rs.getString(4) %></td>
                                         <td><%=rs.getString(5) %></td>
                                         <td><%=rs.getString(6) %></td>
                                         <td><%=rs.getString(7) %></td>
                                         <td><%=rs.getString(8) %></td>
-                                        <td><%=rs.getString(9) %></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
                                         <td class="text-center"><i class="material-icons">delete</i></i></td>
                                     </tr>

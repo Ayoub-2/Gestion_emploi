@@ -4,6 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pfa.connectionProvide.*" %>
+<%
+Connection con ;
+PreparedStatement preparedStatement;
+ResultSet rs,rs1;
+%>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -290,8 +295,13 @@
               </script>
             <div class="container">
                     <ul class="nav nav-tabs">
-                      <li class="active nav-item" role="presentation"><a data-toggle="tab" href="#u1">Formation 1</a></li>
-                      <li class="nav-item" role="presentation"><a data-toggle="tab" href="#u2">Formation 2</a></li>
+ <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT * FROM formation ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+ %>
+                      <li class="active nav-item" role="presentation"><a data-toggle="tab" href="#u<%=rs.getInt(1)%>"><%=rs.getString(1) %></a></li><%} %>
                       <li>
                         <div class="text-center">
                           <a href="" class="btn btn-primary mb-0" style="padding: 10px" data-toggle="modal" data-target="#AddElement">Ajouter Element</a>
@@ -367,7 +377,13 @@
                     </ul>
 
                     <div class="tab-content">
-                      <div id="u1" class="tab-pane fade active" style="background-color: white;">
+<%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT id from formation");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                      <div id="u<%=rs.getInt(1)%>" class="tab-pane fade active" style="background-color: white;">
                         <div class="">
                           <div class="card  card-body">
                            <table class="my-table-bordred table-bordered col-12">
@@ -381,6 +397,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <%
+                    			preparedStatement = con.prepareStatement("SELECT M.id , M.nom FROM module M join on formation F on F.id=M.id_form where F.id=?");
+                                preparedStatement.setInt(1,rs.getInt(1));
+                    			rs1 = preparedStatement.executeQuery();
+                                while (rs1.next()) {
+                                %>
                                     <tr>
                                         <td>Cell</td>
                                         <td>Cell</td>
@@ -389,14 +411,8 @@
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
                                     </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal">delete</i></td>
-                                    </tr>
+                                <%
+                                }%>
                                     <tr>
                                         <td>Cell</td>
                                         <td>Cell</td>
@@ -405,11 +421,15 @@
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" >delete</i></td>
                                     </tr>
+                                    
                                 </tbody>
                             </table>
                            </div>
                         </div>
                       </div>
+<%
+}%>
+<!-- 
                       <div id="u2" class="tab-pane fade" style="background-color: white;">
                         <div class="">
                            <div class="card" style="padding: 20px">
@@ -454,7 +474,7 @@
                         </div>
                       </div>
                     </div>
-
+-->
             </div>
         </div>
             <footer class="footer text-center">

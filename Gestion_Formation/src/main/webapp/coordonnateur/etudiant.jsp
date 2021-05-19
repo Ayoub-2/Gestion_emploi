@@ -1,10 +1,17 @@
-
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pfa.connectionProvide.*" %>
+<%
+Connection con ;
+PreparedStatement preparedStatement;
+ResultSet rs;
+%>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -169,7 +176,15 @@
                             <label class="col-sm-12 ">Formation</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM formation ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                           </div>
@@ -177,7 +192,15 @@
                             <label class="col-sm-12 ">Niveau</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM niveau ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                           </div>
@@ -254,7 +277,15 @@
                             <label class="col-sm-12 ">Niveau</label>
                             <div class="col-sm-12">
                                 <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                                 <%
+                                con = (new ConnectionProvider()).getConnection();
+                    			preparedStatement = con.prepareStatement("SELECT nom FROM niveau ");
+                    			rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option><%=rs.getString(1) %></option>
+                                <%
+                                }%>
                                 </select>
                             </div>
                         </div>
@@ -298,20 +329,55 @@
                                 </thead>
                                 <tbody>
                                 <%
-                                Connection con = (new ConnectionProvider()).getConnection();
-                    			PreparedStatement preparedStatement = con.prepareStatement("SELECT E.id , E.nom , prenom ,email ,N.nom, genre , null, adresse  FROM Etudiant E join Niveau N on N.id = E.id_niv ");
-                    			ResultSet rs = preparedStatement.executeQuery();
-                                while (rs.next()) {
+                                 con = (new ConnectionProvider()).getConnection();
+                                 int i = 0 ;
+                    			 preparedStatement = con.prepareStatement("SELECT E.id , E.nom , prenom ,email ,N.nom, genre , adresse , F.nom  FROM Etudiant E join Niveau N on N.id = E.id_niv join inscription I on E.id=I.id_et join formation F on F.id = I.id_form group by E.id ");
+                    			 rs = preparedStatement.executeQuery();
+                    			 List<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>(); 
+                    			 ArrayList<String> list1 = new ArrayList<String>();
+                    			 rs.next();
+            					 list1.add(Integer.toString(rs.getInt(1)));
+            					 list1.add(rs.getString(2));
+            					 list1.add(rs.getString(3));
+            					 list1.add(rs.getString(4));
+            					 list1.add(rs.getString(5));
+            					 list1.add(rs.getString(6));
+            					 list1.add(rs.getString(7));
+            					 list1.add(rs.getString(8));
+                    			 while (rs.next()) {
+                    				 if (rs.getInt(1) != i) {
+                    					 listOfLists.add(list1);
+                    					 list1 = new ArrayList<String>() ;
+                    					 list1.add(Integer.toString(rs.getInt(1)));
+                    					 list1.add(rs.getString(2));
+                    					 list1.add(rs.getString(3));
+                    					 list1.add(rs.getString(4));
+                    					 list1.add(rs.getString(5));
+                    					 list1.add(rs.getString(6));
+                    					 list1.add(rs.getString(7));
+                    					 list1.add(rs.getString(8));
+                    				 }else {
+                    					 list1.add(rs.getString(8));
+                    				 }
+                    			 }
+                    				
+                    			for(List list : listOfLists ){
                                 	%>
                                     <tr>
-                                        <td><%=rs.getInt(1)%></td>
-                                        <td><%= rs.getString(2)%></td>
-                                        <td><%= rs.getString(3)%></td>
-                                        <td><%= rs.getString(4)%></td>
-                                        <td><%= rs.getString(5)%></td>
-                                        <td><%= rs.getString(6)%></td>
-                                        <td><%= rs.getString(7)%></td>
-                                        <td><%= rs.getString(8)%></td>
+                                        <td><%= list.get(1)%></td>
+                                        <td><%= list.get(2)%></td>
+                                        <td><%= list.get(3)%></td>
+                                        <td><%= list.get(4)%></td>
+                                        <td><%= list.get(5)%></td>
+                                        <td><%= list.get(6)%></td>
+                                        <td><%= list.get(7)%></td>
+                                        <td>
+                                        <%
+                                        for (int j = 7 ; j < list.size() ; j++ ) {
+                                        out.print(list.get(j+1));
+                                        }
+                                        %>
+                                        </td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#DelProf">delete</i></td>
                                     </tr>

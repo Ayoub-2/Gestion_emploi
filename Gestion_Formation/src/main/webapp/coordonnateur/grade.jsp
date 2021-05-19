@@ -4,6 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pfa.connectionProvide.*" %>
+<%
+Connection con ;
+PreparedStatement preparedStatement;
+ResultSet rs;
+%>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -208,9 +213,9 @@
                                 </thead>
                                 <tbody>
 <%
-                                Connection con = (new ConnectionProvider()).getConnection();
-                    			PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM grade ");
-                    			ResultSet rs = preparedStatement.executeQuery();
+                                 con = (new ConnectionProvider()).getConnection();
+                    			 preparedStatement = con.prepareStatement("SELECT id, nom FROM grade ");
+                    			 rs = preparedStatement.executeQuery();
                                 while (rs.next()) {
 %>
                                     <tr>
