@@ -1,8 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en" style="font-size: 17px">
-
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="">
@@ -53,7 +52,7 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
@@ -74,7 +73,7 @@
                         <!-- User Profile-->
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="../assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                         <h5 class="m-b-0 user-name font-medium">Nom <i class=""></i></h5>
                                         <span class="op-5 user-content">Rôle</span>
@@ -308,7 +307,7 @@
                             </div>
                             <div class="comment-widgets scrollable">
                                 <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2"><img src="../assets/images/users/agent.jpg" alt="user" width="50"
+                                    <div class="p-2"><img src="../assets/images/users/agent.png" alt="user" width="50"
                                             class="rounded-circle"></div>
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">James Anderson</h6>
@@ -371,7 +370,7 @@
                                 <h4 class="card-title">Temp Guide</h4>
                                 <div class="d-flex align-items-center flex-row m-t-30">
                                     <div class="display-5 text-info"><i class="wi wi-day-showers"></i>
-                                        <span>73<sup>°</sup></span></div>
+                                        <span>73<sup>Â°</sup></span></div>
                                     <div class="m-l-10">
                                         <h3 class="m-b-0">Saturday</h3><small>Ahmedabad, India</small>
                                     </div>
@@ -400,22 +399,22 @@
                                     <li class="col-3">
                                         <h4 class="text-info"><i class="wi wi-day-sunny"></i></h4>
                                         <span class="d-block text-muted">09:30</span>
-                                        <h3 class="m-t-5">70<sup>°</sup></h3>
+                                        <h3 class="m-t-5">70<sup>Â°</sup></h3>
                                     </li>
                                     <li class="col-3">
                                         <h4 class="text-info"><i class="wi wi-day-cloudy"></i></h4>
                                         <span class="d-block text-muted">11:30</span>
-                                        <h3 class="m-t-5">72<sup>°</sup></h3>
+                                        <h3 class="m-t-5">72<sup>Â°</sup></h3>
                                     </li>
                                     <li class="col-3">
                                         <h4 class="text-info"><i class="wi wi-day-hail"></i></h4>
                                         <span class="d-block text-muted">13:30</span>
-                                        <h3 class="m-t-5">75<sup>°</sup></h3>
+                                        <h3 class="m-t-5">75<sup>Â°</sup></h3>
                                     </li>
                                     <li class="col-3">
                                         <h4 class="text-info"><i class="wi wi-day-sprinkle"></i></h4>
                                         <span class="d-block text-muted">15:30</span>
-                                        <h3 class="m-t-5">76<sup>°</sup></h3>
+                                        <h3 class="m-t-5">76<sup>Â°</sup></h3>
                                     </li>
                                 </ul>
                             </div>

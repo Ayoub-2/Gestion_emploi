@@ -12,8 +12,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="../dist/css/table.css" rel="stylesheet">
-    <link href="../dist/css/navbar.css" rel="stylesheet">
+    
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <link href="../dist/css/navbar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -53,13 +54,13 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
                                     Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
-                                    Se dÃ©connecter</a>
+                                    Se déconnecter</a>
                         </li>
                     </ul>
                 </div>
@@ -71,10 +72,10 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="../assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                         <h5 class="m-b-0 user-name font-medium">Nom <i class=""></i></h5>
-                                        <span class="op-5 user-content">RÃ´le</span>
+                                        <span class="op-5 user-content">Rôle</span>
                                 </div>
                             </div>
                         </li>
@@ -111,18 +112,19 @@
                     </ul>
                 </nav>
             </div>
+<form action="../emploi" method="post">
             <div class="page-breadcrumb">
-                <div class="row align-items-start">
+                <div class="row align-items-start pb-3">
                     <div class="container">
                         <div class="row justify-content-end ">
                             <div class="col">
                                 <h4 class="page-title">Table d'emploi</h4>
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-warning ">
+                                <button type="button" class="btn btn-warning">
                                     Modifier
                                 </button>
-                                <button type="button" class="btn btn-danger" onclick="souvegarader()">
+                                <button type="submit" class="btn btn-danger">
                                     Souvegarder
                                 </button>
                             </div>
@@ -130,34 +132,22 @@
                     </div>
                 </div>
             </div>
-            <script language="javascript">
-                function souvegarader(){
-                    var tab_input = document.getElementsByClassName("tab_input");
-                    alert("helo"+tab_input[0].value);
-                    Array.prototype.forEach.call(tab_input, function(t_input) {
-                        // Do stuff here
-                        if(t_input == "") alert("5555");
-                    });
-                }
-            </script>
             <div class="container-fluid">
-                </style>
-                
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <hr width="0">
                             <div class="row justify-content-end">
+                             	<input type="hidden" name="ID_formation" value="123">
                                 <div class="col-sm-3">
-                                    <label class="col-12">IntitulÃ©</label>
+                                    <label class="col-12">Intitulé</label>
                                     <div class="col-12 text-secondary">
-                                        <input type="text" class="form-control form-control-line"> 
+                                        <input type="text" name="Intitule" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="col-sm-3 offset-6">
-                                    <label class="col-12">Programme d'emploi NÂ°</label>
+                                    <label class="col-12">Programme d'emploi N°</label>
                                     <div class="col-12 text-secondary">
-                                        <input type="text" class="form-control form-control-line"> 
+                                        <input type="text" name="ProgrammeEmpl" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                             </div>
@@ -165,108 +155,186 @@
                                 <div class="col-sm-3">
                                     <label class="col-12">Responsable</label>
                                     <div class="col-12 text-secondary">
-                                        <input type="text" class="form-control form-control-line"> 
+                                        <input type="text" name="Responsable" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="col-sm-3 offset-6">
                                     <label class="col-12">Exercice</label>
                                     <div class="col-12 text-secondary">
-                                        <input type="text" class="form-control form-control-line"> 
+                                        <input type="text" name="Exercice" class="form-control form-control-line" placeholder="JJ/MM/AAAA"> 
                                     </div>
                                 </div>
                             </div>
 
-                        
-
-                            <div class="col-12 center-block py-20">
+                            <div class="col-12 center-block py-20 pt-2">
+                            
                                 <table class="my-table" id="table_emp" style="margin: 2px;">
                                 <thead style="background-color: rgb(201, 208, 212);">
-                                    <tr class="my-firstrow"><th>Art.</th><th>Â§</th><th>Ligne</th><th>DÃ©signation des Rubriques</th><th>CrÃ©dit ouvert</th></tr>
+                                    <tr class="my-firstrow"><th>Art.</th><th>§</th><th>Ligne</th><th>Désignation des Rubriques</th><th>Crédit ouvert</th></tr>
                                 </thead>
                                     <tbody>
                                         <tr><td>911</td><td>&nbsp;</td><td>&nbsp;</td><td>FORMATION CONTINUE, TRAVAUX DE RECHERCHE ET PRESTATIONS DE SERVICE</td><td></td></tr>
-                                        <tr><td>&nbsp;</td><td>10</td><td>&nbsp;</td><td>Formation continue </td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Personnel</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>10</td><td>IndemnitÃ©s et allocations </td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>11</td><td>IndemnitÃ©s complÃ©mentaires liÃ©es aux formations continues</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>12</td><td>IndemnitÃ©s brutes des enseignants et des experts Ã©trangers dans les domaines de la recherche scientifique et technologique, formations et travaux d'expertise</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>13</td><td>RÃ©munÃ©ration des post-doctorants travaillant dans le cadre de projets</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>14</td><td>RÃ©munÃ©ration des agents contractuels</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>15</td><td>RÃ©munÃ©ration des experts marocains et Ã©trangers</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>MDD</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>10</td><td>Frais et redevances</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>11</td><td>Redevances pour brevets, marques, droits et valeurs similaires</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>12</td><td>Frais d'Ã©tudes, d'analyses et de sous-traltance</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>13</td><td>Frais de rÃ©alisation de maquettes et prototypes</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>14</td><td>Frais d'Ã©tudes et d'expertise</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>15</td><td>Frais d'aconage et d'emmagasinage</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>16</td><td>Redevances d'eau</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>17</td><td>Redevances d'Ã©lectricitÃ©</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>18</td><td>Taxes et redevances de tÃ©lÃ©communications</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>19</td><td>Taxes et redevances pour l'utilisation de lignes ou rÃ©seaux spÃ©cialisÃ©s</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>20</td><td>SÃ©minaires, stages et formation</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>21</td><td>Frais de formation</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>22</td><td>Frais de stages et de sÃ©minaires</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>23</td><td>Frais de participation aux sÃ©minaires, congrÃ©s et colloques</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>24</td><td>Frais de participation et d'inscription aux colloques, sÃ©minaires et concours pour le personnel et les Ã©tudiants chercheurs</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>25</td><td>Frais d'organisation de colloques et de sÃ©minaires</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>26</td><td>Frais d'hÃ©bergement et de restauration</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>27</td><td>Frais de rÃ©ception et de cÃ©rÃ©monies officielles</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>28</td><td>Frais de distributions des prix</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>30</td><td>Achat d'ouvrage, frais d'Ã©dition</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>31</td><td>Abonnements et documentation</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>32</td><td>Achat d'ouvrages pour la bibliothÃ¨que</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>33</td><td>Frais de reliure</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>34</td><td>Annonces et insertions</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>35</td><td>Frais de dÃ©monstration et de publicitÃ©</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>36</td><td>Frais de participation aux foires et expositions</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>37</td><td>Publications et impressions</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>40</td><td>AmÃ©nagement, entretien et Ã©quipement</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>41</td><td>Agencement, amÃ©nagement et installation</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>42</td><td>Etudes liÃ©es Ã  la construction et Ã  l'amÃ©nagement des bÃ¢timents administratifs</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>43</td><td>Locations de bÃ¢timents administratifs et charges connexes</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>44</td><td>Entretien et rÃ©paration des bÃ¢timents pÃ©dagogiques et administratifs</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>45</td><td>Entretien et rÃ©paration du mobilier, du matÃ©riel de bureau et du matÃ©riel d'impression</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>50</td><td>Achat de fournitures</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>51</td><td>Achats de petit outillage et pet Ã©quipement</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>52</td><td>Achat de fournitures informatiques</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>53</td><td>Achat de fournitures et de produits pour les travaux de terrain et de laboratoire</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>54</td><td>Achat de fournitures de bureau, papetrie et imprimÃ©s</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>55</td><td>Achat de matiÃ¨res premiÃ¨res</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>56</td><td>Achat d'animaux de laboratoire</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>57</td><td>Achat de produits pharmaceutiques</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>58</td><td>Achat de carburants et lubrifiants</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>60</td><td>Transports et dÃ©placements</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>61</td><td>Frais de transport du personnel et des Ã©tudiants Ã  l'Ã©tranger</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>62</td><td>Frais de mission Ã  l'Ã©tranger des participants</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>63</td><td>Frais de transport du personnel et des Ã©tudiants au Maroc</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>64</td><td>Frais de transport du mobilier et du matÃ©riel</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>65</td><td>Frais de transport et de sÃ©jour des missionnaires et chercheurs Ã©trangers</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>66</td><td>IndemnitÃ©s de dÃ©placement Ã  l'intÃ©rieur du Royaume</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>67</td><td>IndemnitÃ©s de dÃ©placement Ã  l'intÃ©rieur du Royaume des nationaux et des non-rÃ©sidents</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>68</td><td>IndemnitÃ©s de mission Ã  l'Ã©tranger</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>69</td><td>IndemnitÃ©s KlomÃ©triques</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>70</td><td>MatÃ©riel et mobilier</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>71</td><td>Achat de matÃ©riel d'enseignement</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>72</td><td>Achat de matÃ©riel technique, scientifique et audiovisuel</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>73</td><td>Achat de matÃ©riel informatique et logiciels et de matÃ©riel d'atelier et de l'outilage</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>74</td><td>Achat de matÃ©riel mÃ©dical</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>75</td><td>Achat de matÃ©riel et mobilier de bureau</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>76</td><td>Achat de mobilier d'enseignement et de laboratoire</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>77</td><td>Entretien et rÃ©paration du matÃ©riel d'enseignement et du matÃ©riel scientifique et de laboratoire</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>78</td><td>Entretien et rÃ©paration du matÃ©riel et outilage</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>79</td><td>Entretien et rÃ©paration de mobilier de bureau, de l'enseignement et de laboratoire</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>80</td><td>DÃ©penses diverses</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>81</td><td>Cotisation et contribution aux organismes nationaux et intÃ©rationaux</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>82</td><td>Restiution et remboursement</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>83</td><td>Remboursement de la TVA et des Droits de douane</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>84</td><td>Taxes postales et frais d'affranchissement</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>85</td><td>Location de matÃ©riel de transport</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>PrÃ©lÃ¨vement 10% ENSIAS</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>PrÃ©lÃ¨vement 10% PrÃ©sidence</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
-                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>90</td><td>CrÃ©dit Ã  programmer</td><td class="td-input"><input class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>10</td><td>&nbsp;</td><td>Formation continue </td><td class="td-input"></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>9</td><td>Personnel</td><td class="td-input">
+<input name="9111009" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>10</td><td>Indemnités et allocations </td><td class="td-input">
+<input name="9111010" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>11</td><td>Indemnités complémentaires liées aux formations continues</td><td class="td-input">
+<input name="9111011" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>12</td><td>Indemnités brutes des enseignants et des experts étrangers dans les domaines de la recherche scientifique et technologique, formations et travaux d'expertise</td><td class="td-input">
+<input name="9111012" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>13</td><td>Rémunération des post-doctorants travaillant dans le cadre de projets</td><td class="td-input">
+<input name="9111013" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>14</td><td>Rémunération des agents contractuels</td><td class="td-input">
+<input name="9111014" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>15</td><td>Rémunération des experts marocains et étrangers</td><td class="td-input">
+<input name="9111015" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>MDD</td><td class="td-input"></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>10</td><td>Frais et redevances</td><td class="td-input">
+<input name="9111110" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>11</td><td>Redevances pour brevets, marques, droits et valeurs similaires</td><td class="td-input">
+<input name="9111111" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>12</td><td>Frais d'études, d'analyses et de sous-traltance</td><td class="td-input">
+<input name="9111112" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>13</td><td>Frais de réalisation de maquettes et prototypes</td><td class="td-input">
+<input name="9111113" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>14</td><td>Frais d'études et d'expertise</td><td class="td-input">
+<input name="9111114" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>15</td><td>Frais d'aconage et d'emmagasinage</td><td class="td-input">
+<input name="9111115" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>16</td><td>Redevances d'eau</td><td class="td-input">
+<input name="9111116" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>17</td><td>Redevances d'électricité</td><td class="td-input">
+<input name="9111117" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>18</td><td>Taxes et redevances de télécommunications</td><td class="td-input">
+<input name="9111118" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>19</td><td>Taxes et redevances pour l'utilisation de lignes ou réseaux spécialisés</td><td class="td-input">
+<input name="9111119" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>20</td><td>Séminaires, stages et formation</td><td class="td-input">
+<input name="9111120" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>21</td><td>Frais de formation</td><td class="td-input">
+<input name="9111121" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>22</td><td>Frais de stages et de séminaires</td><td class="td-input">
+<input name="9111122" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>23</td><td>Frais de participation aux séminaires, congrés et colloques</td><td class="td-input">
+<input name="9111123" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>24</td><td>Frais de participation et d'inscription aux colloques, séminaires et concours pour le personnel et les étudiants chercheurs</td><td class="td-input">
+<input name="9111124" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>25</td><td>Frais d'organisation de colloques et de séminaires</td><td class="td-input">
+<input name="9111125" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>26</td><td>Frais d'hébergement et de restauration</td><td class="td-input">
+<input name="9111126" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>27</td><td>Frais de réception et de cérémonies officielles</td><td class="td-input">
+<input name="9111127" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>28</td><td>Frais de distributions des prix</td><td class="td-input">
+<input name="9111128" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>30</td><td>Achat d'ouvrage, frais d'édition</td><td class="td-input">
+<input name="9111130" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>31</td><td>Abonnements et documentation</td><td class="td-input">
+<input name="9111131" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>32</td><td>Achat d'ouvrages pour la bibliothèque</td><td class="td-input">
+<input name="9111132" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>33</td><td>Frais de reliure</td><td class="td-input">
+<input name="9111133" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>34</td><td>Annonces et insertions</td><td class="td-input">
+<input name="9111134" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>35</td><td>Frais de démonstration et de publicité</td><td class="td-input">
+<input name="9111135" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>36</td><td>Frais de participation aux foires et expositions</td><td class="td-input">
+<input name="9111136" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>37</td><td>Publications et impressions</td><td class="td-input">
+<input name="9111137" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>40</td><td>Aménagement, entretien et équipement</td><td class="td-input">
+<input name="9111140" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>41</td><td>Agencement, aménagement et installation</td><td class="td-input">
+<input name="9111141" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>42</td><td>Etudes liées à  la construction et à  l'aménagement des bàtiments administratifs</td><td class="td-input">
+<input name="9111142" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>43</td><td>Locations de bàtiments administratifs et charges connexes</td><td class="td-input">
+<input name="9111143" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>44</td><td>Entretien et réparation des bàtiments pédagogiques et administratifs</td><td class="td-input">
+<input name="9111144" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>45</td><td>Entretien et réparation du mobilier, du matériel de bureau et du matériel d'impression</td><td class="td-input">
+<input name="9111145" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>50</td><td>Achat de fournitures</td><td class="td-input">
+<input name="9111150" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>51</td><td>Achats de petit outillage et pet équipement</td><td class="td-input">
+<input name="9111151" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>52</td><td>Achat de fournitures informatiques</td><td class="td-input">
+<input name="9111152" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>53</td><td>Achat de fournitures et de produits pour les travaux de terrain et de laboratoire</td><td class="td-input">
+<input name="9111153" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>54</td><td>Achat de fournitures de bureau, papetrie et imprimés</td><td class="td-input">
+<input name="9111154" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>55</td><td>Achat de matières premières</td><td class="td-input">
+<input name="9111155" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>56</td><td>Achat d'animaux de laboratoire</td><td class="td-input">
+<input name="9111156" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>57</td><td>Achat de produits pharmaceutiques</td><td class="td-input">
+<input name="9111157" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>58</td><td>Achat de carburants et lubrifiants</td><td class="td-input">
+<input name="9111158" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>60</td><td>Transports et déplacements</td><td class="td-input">
+<input name="9111160" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>61</td><td>Frais de transport du personnel et des étudiants à  l'étranger</td><td class="td-input">
+<input name="9111161" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>62</td><td>Frais de mission à  l'étranger des participants</td><td class="td-input">
+<input name="9111162" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>63</td><td>Frais de transport du personnel et des étudiants au Maroc</td><td class="td-input">
+<input name="9111163" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>64</td><td>Frais de transport du mobilier et du matériel</td><td class="td-input">
+<input name="9111164" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>65</td><td>Frais de transport et de séjour des missionnaires et chercheurs étrangers</td><td class="td-input">
+<input name="9111165" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>66</td><td>Indemnités de déplacement à  l'intérieur du Royaume</td><td class="td-input">
+<input name="9111166" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>67</td><td>Indemnités de déplacement à  l'intérieur du Royaume des nationaux et des non-résidents</td><td class="td-input">
+<input name="9111167" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>68</td><td>Indemnités de mission à  l'étranger</td><td class="td-input">
+<input name="9111168" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>69</td><td>Indemnités Klométriques</td><td class="td-input">
+<input name="9111169" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>70</td><td>Matériel et mobilier</td><td class="td-input">
+<input name="9111170" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>71</td><td>Achat de matériel d'enseignement</td><td class="td-input">
+<input name="9111171" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>72</td><td>Achat de matériel technique, scientifique et audiovisuel</td><td class="td-input">
+<input name="9111172" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>73</td><td>Achat de matériel informatique et logiciels et de matériel d'atelier et de l'outilage</td><td class="td-input">
+<input name="9111173" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>74</td><td>Achat de matériel médical</td><td class="td-input">
+<input name="9111174" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>75</td><td>Achat de matériel et mobilier de bureau</td><td class="td-input">
+<input name="9111175" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>76</td><td>Achat de mobilier d'enseignement et de laboratoire</td><td class="td-input">
+<input name="9111176" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>77</td><td>Entretien et réparation du matériel d'enseignement et du matériel scientifique et de laboratoire</td><td class="td-input">
+<input name="9111177" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>78</td><td>Entretien et réparation du matériel et outilage</td><td class="td-input">
+<input name="9111178" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>79</td><td>Entretien et réparation de mobilier de bureau, de l'enseignement et de laboratoire</td><td class="td-input">
+<input name="9111179" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>80</td><td>Dépenses diverses</td><td class="td-input">
+<input name="9111180" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>81</td><td>Cotisation et contribution aux organismes nationaux et intérationaux</td><td class="td-input">
+<input name="9111181" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>82</td><td>Restiution et remboursement</td><td class="td-input">
+<input name="9111182" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>83</td><td>Remboursement de la TVA et des Droits de douane</td><td class="td-input">
+<input name="9111183" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>84</td><td>Taxes postales et frais d'affranchissement</td><td class="td-input">
+<input name="9111184" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>85</td><td>Location de matériel de transport</td><td class="td-input">
+<input name="9111185" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Prélèvement 10% ENSIAS</td><td class="td-input">
+<input name="9111186" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Prélèvement 10% Présidence</td><td class="td-input">
+<input name="9111187" class="tab_input" type="text" size="12"/></td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>90</td><td>Crédit à  programmer</td><td class="td-input">
+<input name="9111190" class="tab_input" type="text" size="12"/></td></tr>
                                         <tr><td>Total</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td></td></tr>
                                 </tbody></table>
+                                </form>
                             </div>
                             </div>
                         </div>

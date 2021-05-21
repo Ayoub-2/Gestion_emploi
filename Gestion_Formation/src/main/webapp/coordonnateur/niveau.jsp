@@ -131,19 +131,20 @@
                     </div>
                     
                     <div class="modal-body">
-                       <form class="form-horizontal form-material mx-2">
+                       <form class="form-horizontal form-material mx-2" action="add" method="post">
+                       <input type="hidden" name="action" value="2">
                         <div class="form-group py-10">
-                            <label for="example-email" class="col-md-12 p-l-25">Nom</label>
+                            <label for="nomNiveau" class="col-md-12 p-l-25">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text"
+                                    class="form-control form-control-line" name="NomNiveau"
+                                    id="NomNiveau">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
+                                    <button class="btn btn-success text-white col-12" type="submit" onclick="addUser()">Ajouter</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -156,7 +157,7 @@
                 </div>
               </div>
 
-            <div class="modal" id="UpdateFormation">
+            <div class="modal" id="UpdateNiveau">
                 <div class="modal-dialog">
                   <div class="modal-content">
                   
@@ -165,19 +166,21 @@
                     </div>
                     
                     <div class="modal-body">
-                       <form class="form-horizontal form-material mx-2">
+                       <form class="form-horizontal form-material mx-2" action="/modify" method="post">
+                       <input type="hidden" name="action" value="2"> 
+                       <input type="hidden" name="id_niveau" value=""> 
                         <div class="form-group py-10">
-                            <label for="example-email" class="col-md-12 p-l-25">Nom</label>
+                            <label for="nomNiveau" class="col-md-12 p-l-25">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text"
+                                    class="form-control form-control-line" name="nom"
+                                    id="nomNiveau">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Valider</button>
+                                    <button class="btn btn-success text-white col-12" type="submit" onclick="addUser()">Valider</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -216,7 +219,7 @@
                                         <td><%=rs.getInt(1) %></td>
                                         <td><%=rs.getString(2) %></td>
                                         <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i class="material-icons">delete</i></i></td>
+                                        <td class="text-center"><i href="javascript:;" onclick="document.getElementById('deletegrade').submit();" class="material-icons">delete</i></i></td>
                                     </tr>
                                     <%} %>
                                 </tbody>

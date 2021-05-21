@@ -55,13 +55,13 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
                                     Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
-                                    Se dÃ©connecter</a>
+                                    Se déonnecter</a>
                         </li>
                     </ul>
                 </div>
@@ -73,7 +73,7 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="../assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                         <h5 class="m-b-0 user-name font-medium">Nom <i class=""></i></h5>
                                         <span class="op-5 user-content">RÃ´le</span>
@@ -116,28 +116,55 @@
             <div class="container-fluid">
                     <div class="col-12" >
                         <div class="card p-20" style="height: 100%;">
-                            <table class="my-table-bordred table-bordered col-12">
+                            <table class="my-table-bordred table table-hover col-12">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Grade</th>
-                                        <th scope="col">Niveau</th>
-                                        <th scope="col">Vacation</th>
-                                        <th scope="col">Elements enseignÃ©s</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Salaire</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Elements enseignés</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td> 
-                                        <td>Cell</td> 
-                                        <td>Cell</td> 
-                                        <td>Cell</td>
-                                        <td>Cell</td> 
-                                    </tr>
+                                <%@page import="java.sql.*" %>
+                                <%@page import="com.pfa.connectionProvide.ConnectionProvider" %>
+                                <%
+                                try{
+                                	Connection connection = new ConnectionProvider().getConnection();
+                                	Statement stm = connection.createStatement();
+                                	ResultSet result = stm.executeQuery
+										("select enseignant.ID, enseignant.nom, prenom, grade.nom, type, salaire, email  from enseignant INNER JOIN grade ON enseignant.ID_grade=grade.ID;");
+                                	while(result.next()){
+	                                %>
+	                                    <tr>
+	                                        <td><%=result.getInt(1)%></td>
+	                                        <td><%=result.getString(2) %></td>
+	                                        <td><%=result.getString(3) %></td> 
+	                                        <td><%=result.getString(4) %></td> 
+	                                        <td><%=result.getString(5) %></td>
+	                                        <td><%=result.getBigDecimal(6) %></td>
+	                                        <td><%=result.getString(7) %></td>
+	                                        <td>
+	                                        <% int ID_ens =  result.getInt(1);
+	                                        Statement stm_1 = connection.createStatement();
+	                                        ResultSet result_1 = stm_1.executeQuery("select nom from element where ID_ENS = "+ID_ens+";");
+	                                        	while(result_1.next()){
+	                                        		System.out.println(result_1.getString(1));
+	                                        		out.write(result_1.getString(1)+"<br/>");
+	                                        	}
+	                                        %>
+	                                        </td>
+	                                    </tr>
+	                                <%
+	                                	}
+	                                }catch(Exception e){
+	                                	e.printStackTrace();
+	                                }
+                                %>
                                 </tbody>
                             </table>
                         </div>
@@ -152,7 +179,12 @@
     <script src="../dist/js/waves.js"></script>
     <script src="../dist/js/sidebarmenu.js"></script>
     <script src="../dist/js/custom.js"></script>
-    
 </body>
 
 </html>
+
+
+
+
+
+

@@ -127,29 +127,28 @@ ResultSet rs;
                     </div>
                 </div>
             </div>
-
-            <div class="modal" id="AddUser">
+            <div class="modal" id="AddGrade">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                  
                     <div class="modal-header bg-light">
                       <h4 class="modal-title mb-3">Ajouter Un Grade</h4>
                     </div>
                     
                     <div class="modal-body">
-                       <form class="form-horizontal form-material mx-2">
+                       <form class="form-horizontal form-material mx-2" action="./add"method="post">
+                       <input type="hidden" name="action" value="1">
                         <div class="form-group py-10">
-                            <label for="example-email" class="col-md-12 p-l-25">Nom</label>
+                            <label for="NomGrade" class="col-md-12 p-l-25">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text"
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomGrade">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
+                                    <button class="btn btn-success text-white col-12"  type="submit">Ajouter</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -161,8 +160,7 @@ ResultSet rs;
                   </div>
                 </div>
               </div>
-
-            <div class="modal" id="UpdateFormation">
+            <div class="modal" id="UpdateGrade">
                 <div class="modal-dialog">
                   <div class="modal-content">
                   
@@ -171,19 +169,21 @@ ResultSet rs;
                     </div>
                     
                     <div class="modal-body">
-                       <form class="form-horizontal form-material mx-2">
+                       <form class="form-horizontal form-material mx-2" action="./modify" method="post">
+                        <input type="hidden" name="action" value="1">
+                        <input type="hidden" name="id_grade" value="">
                         <div class="form-group py-10">
-                            <label for="example-email" class="col-md-12 p-l-25">Nom</label>
+                            <label for="NomGrade" class="col-md-12 p-l-25">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text"
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomGrade">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Valider</button>
+                                    <button class="btn btn-success text-white col-12" type="submit" onclick="addUser()">Valider</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -195,11 +195,10 @@ ResultSet rs;
                   </div>
                 </div>
               </div>
-              <script>
-                  function addUser(){
-                      
-                  }
-              </script>
+<form action="/delete" id="deletegrade" method="post">
+<input type="hidden" name="id_grade" value="">
+<button type="submit"></button>
+</form>
                 <div class="container-fluid">
                     <div class="col-12">
                          <div class="card" style="padding: 20px">
@@ -221,8 +220,8 @@ ResultSet rs;
                                     <tr>
                                         <td><%=rs.getInt(1) %></td>
                                         <td><%=rs.getString(2) %></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i class="material-icons">delete</i></i></td>
+                                        <td class="text-center"><i  href="update.jsp?id=<%=rs.getInt(1)%>" class="btn material-icons" data-toggle="modal" data-target="#UpdateGrade">create</i></td>
+                                        <td class="text-center"><i href="javascript:;" onclick="document.getElementById('deletegrade').submit();" class="material-icons">delete</i></i></td>
                                     </tr>
                                     <%} %>
                                 </tbody>
@@ -232,7 +231,7 @@ ResultSet rs;
                 </div>
 
             <footer class="footer text-center">
-                All Rights Reserved by Ensias. Designed and Developed by <a
+                 <a
                     href="https://www.PFA.com">PFA-Boubekri-Bouallal</a>.
             </footer>
         </div>

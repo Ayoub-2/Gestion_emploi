@@ -54,7 +54,7 @@
                     <ul class="navbar-nav float-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../assets/images/users/agent.jpg" alt="user" class="rounded-circle" width="31">
+                                <img src="../assets/images/users/agent.png" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
@@ -72,7 +72,7 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="../assets/images/users/agent.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                <div class="user-pic"><img src="../assets/images/users/agent.png" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                         <h5 class="m-b-0 user-name font-medium">Nom <i class=""></i></h5>
                                         <span class="op-5 user-content">Rôle</span>

@@ -122,14 +122,14 @@ ResultSet rs;
                     </div>
                     <div class="col-7">
                         <div class="text-end">
-                            <a href="" class="btn btn-primary mb-4" style="padding: 10px" data-toggle="modal" data-target="#AddProf">Ajouter un Enseignant</a>
+                            <a href="" class="btn btn-primary mb-4" style="padding: 10px" data-toggle="modal" data-target="#AddEns">Ajouter un Enseignant</a>
                         </div>
                     </div>
                 </div>
             </div>
 <!-- Ajouter Professeur -->
 
-            <div class="modal" id="AddProf">
+            <div class="modal" id="AddEns">
                 <div class="modal-dialog">
                   <div class="modal-content">
                   
@@ -140,16 +140,17 @@ ResultSet rs;
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
+                    <form class="form-horizontal form-material mx-3" action="/add" method="post">
+                    <input type="hidden" name="action" value="4">
                         <div class="form-group ">
                             <div class="row align-content-between mx-3">
                                 <div class="col-sm-6 p-l-0" >
                                     <label class="col-12">Nom</label>
-                                    <input type="text" class="form-control form-control-line">
+                                    <input type="text" name="nom" class="form-control form-control-line">
                                 </div>
                                 <div class="col-sm-6 p-r-0">
                                     <label class="col-12">Prenom</label>
-                                    <input type="text" class="form-control form-control-line">
+                                    <input type="text" name="prenom" class="form-control form-control-line">
                                 </div>
                             </div>
                         </div>
@@ -158,14 +159,14 @@ ResultSet rs;
                             <label for="example-email" class="col-md-12 ">Email</label>
                             <div class="col-sm-12">
                                 <input type="email" placeholder="nom@prenom.com"
-                                    class="form-control form-control-line" name="example-email"
+                                    class="form-control form-control-line" name="email"
                                     id="example-email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12 ">Genre</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select class="form-select shadow-none form-control-line" name="genre">
                                     <option>Homme</option>
                                     <option>Femme</option>
                                 </select>
@@ -174,7 +175,7 @@ ResultSet rs;
                         <div class="form-group">
                             <label class="col-sm-12 ">Element</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select class="form-select shadow-none form-control-line" name="element">
                                 <%
                                  con = (new ConnectionProvider()).getConnection();
                     			 preparedStatement = con.prepareStatement("SELECT nom FROM element ");
@@ -190,7 +191,7 @@ ResultSet rs;
                         <div class="form-group">
                             <label class="col-sm-12 ">Departement</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select class="form-select shadow-none form-control-line" name="departement">
                                 <%
                                 con = (new ConnectionProvider()).getConnection();
                     			preparedStatement = con.prepareStatement("SELECT nom FROM departement ");
@@ -206,7 +207,7 @@ ResultSet rs;
                         <div class="form-group">
                             <label class="col-sm-12 ">Grade</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select class="form-select shadow-none form-control-line" name="grade">
                                 <%
                                 con = (new ConnectionProvider()).getConnection();
                     			preparedStatement = con.prepareStatement("SELECT nom FROM grade ");
@@ -222,7 +223,7 @@ ResultSet rs;
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
+                                    <button class="btn btn-success text-white col-12" type="submit" onclick="addUser()">Ajouter</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -251,31 +252,33 @@ ResultSet rs;
                     </div>
                     
                     <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
+                    <form class="form-horizontal form-material mx-3" action="/modify" method="post">
+                    <input type="hidden" name="action" value="4">
+                    <input type="hidden" name="id_ens" value="">
                         <div class="form-group ">
                             <div class="row align-content-between mx-3">
                                 <div class="col-sm-6 p-l-0" >
                                     <label for="nom-prof" class="col-12">Nom</label>
-                                    <input type="text" name="prenom-prof" id="prenom-prof" class="form-control form-control-line">
+                                    <input type="text" name="nom" id="prenom-prof" class="form-control form-control-line">
                                 </div>
                                 <div class="col-sm-6 p-r-0">
                                     <label for="prenom-prof" class="col-12">Prenom</label>
-                                    <input name="prenom-prof" id="prenom-prof" type="text" class="form-control form-control-line">
+                                    <input name="prenom" id="prenom-prof" type="text" class="form-control form-control-line">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="example-email" class="col-md-12 ">Email</label>
                             <div class="col-sm-12">
-                                <input type="email" placeholder="nom@prenom.com"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="email" placeholder="example@um5.ac.ma"
+                                    class="form-control form-control-line" name="email"
+                                    id="example-email" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12 ">Genre</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select name="genre" class="form-select shadow-none form-control-line">
                                     <option>Homme</option>
                                     <option>Femme</option>
                                 </select>
@@ -284,14 +287,14 @@ ResultSet rs;
                         <div class="form-group">
                             <label class="col-sm-12 ">Adresse</label>
                             <div class="col-sm-12">
-                                <textarea class="form-control form-control-line" 
+                                <textarea name="adresse" class="form-control form-control-line" 
                                     rows="3"></textarea>
                             </div>
                           </div>
                         <div class="form-group">
                             <label class="col-sm-12 ">Grade</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select nme="grade" class="form-select shadow-none form-control-line">
                                 <%
                                 con = (new ConnectionProvider()).getConnection();
                     			preparedStatement = con.prepareStatement("SELECT nom FROM grade ");
@@ -307,7 +310,7 @@ ResultSet rs;
                         <div class="form-group">
                             <label class="col-sm-12 ">Departement</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select name="departement" class="form-select shadow-none form-control-line">
                                 <%
                                 con = (new ConnectionProvider()).getConnection();
                     			preparedStatement = con.prepareStatement("SELECT nom FROM departement ");
@@ -323,7 +326,7 @@ ResultSet rs;
                           <div class="form-group">
                             <label class="col-sm-12 ">Element</label>
                             <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
+                                <select name="element" class="form-select shadow-none form-control-line">
                                 <%
                                  con = (new ConnectionProvider()).getConnection();
                     			 preparedStatement = con.prepareStatement("SELECT nom FROM element ");
@@ -339,10 +342,10 @@ ResultSet rs;
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="updateProf()">Valider</button>
+                                    <button class="btn btn-success text-white col-12" type="submit" onclick="updateProf()">Valider</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
-                                    <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
+                                    <button  type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +354,10 @@ ResultSet rs;
                   </div>
                 </div>
               </div>
-<!-- Afficher professeurs -->
+<form action="/delete" id="deleteens" method="post">
+<input type="hidden" name="id_ens" value="">
+<button type="submit" style="display: none;"></button>
+</form>
                 <div class="container-fluid">
                     <div class="col-12">
                          <div class="card" style="padding: 20px">
@@ -363,7 +369,7 @@ ResultSet rs;
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Type</th>
-                                        <th scope="col">Salaire</th>
+                                        <th scope="col">Grade</th>
                                         <th scope="col">Matiere</th>
                                         <th scope="col">Departement</th>
                                         <th  class="col-1" colspan=2><center>Action </center></th>
@@ -385,8 +391,8 @@ ResultSet rs;
                                         <td><%=rs.getString(6) %></td>
                                         <td><%=rs.getString(7) %></td>
                                         <td><%=rs.getString(8) %></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i class="material-icons">delete</i></i></td>
+                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateEns">create</i></td>
+                                        <td class="text-center"><i href="javascript:;" onclick="document.getElementById('deleteens').submit();" class="material-icons">delete</i></i></td>
                                     </tr>
                                     <%
                                 }
