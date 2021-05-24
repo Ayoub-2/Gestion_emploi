@@ -6,8 +6,13 @@
 <%@ page import="com.pfa.connectionProvide.*" %>
 <%
 Connection con ;
-PreparedStatement preparedStatement;
-ResultSet rs,rs1;
+PreparedStatement preparedStatement  , stat1, stat2;
+ResultSet rs,rs1; %>
+<%!
+public String capitalise(String str) {
+	String output = str.substring(0, 1).toUpperCase() + str.substring(1);
+	return output;
+}
 %>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
@@ -32,7 +37,7 @@ ResultSet rs,rs1;
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="../dist/css/table.css" rel="stylesheet">
     </head>
-<body>
+<body onbeforeload="First()">
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -134,19 +139,36 @@ ResultSet rs,rs1;
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
+                    <form class="form-horizontal form-material mx-3" action="./add" method="post">
+                    <input type="hidden" name="action" value="6">
                         <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Nom</label>
+                            <label for="NomMod" class="col-md-12 ">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email" placeholder=""
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text" placeholder=""
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomMod">
+                            </div>
+                        </div>
+                           <div class="form-group">
+                              <label class="col-sm-12 ">Formation</label>
+                              <div class="col-sm-12">
+                                 <select class="form-select shadow-none form-control-line" name="id_formation">
+
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                           		preparedStatement = con.prepareStatement("SELECT * FROM formation ");
+                           		rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option value="<%=rs.getInt(1) %>"><%=capitalise(rs.getString(2)) %></option>
+                                   <%} %>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
+                                    <button class="btn btn-success text-white col-12" type="submit">Ajouter</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -165,40 +187,57 @@ ResultSet rs,rs1;
                   
                     <!-- Modal Header -->
                     <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Ajouter Un Elemnt</h4>
+                      <h4 class="modal-title mb-3">Ajouter Un Element</h4>
                     </div>
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
+                    <form class="form-horizontal form-material mx-3" action="./add" method="post">
+                    <input type="hidden" name="action" value="7">
                         <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Nom</label>
+                            <label for="NomElement" class="col-md-12 ">Nom</label>
                             <div class="col-sm-12">
-                                <input type="email" placeholder=""
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                                <input type="text" placeholder=""
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomEmail">
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Formation</label>
-                            <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                           <div class="form-group">
+                              <label class="col-sm-12 ">Enseignant</label>
+                              <div class="col-sm-12">
+                                 <select class="form-select shadow-none form-control-line" name="id_ens">
+
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                           		preparedStatement = con.prepareStatement("SELECT id,nom,prenom FROM enseignant ");
+                           		rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option value="<%=rs.getInt(1) %>"><%=capitalise(rs.getString(2))+ " " +capitalise(rs.getString(3)) %></option>
+                                   <%} %>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Professeur</label>
-                            <div class="col-sm-12">
-                                <input type="email" placeholder=""
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
+                           <div class="form-group">
+                              <label class="col-sm-12 ">Module</label>
+                              <div class="col-sm-12">
+                                 <select class="form-select shadow-none form-control-line" name="id_module">
+
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                           		preparedStatement = con.prepareStatement("SELECT id , nom FROM module ");
+                           		rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option value="<%=rs.getInt(1) %>"><%=capitalise(rs.getString(2)) %></option>
+                                   <%} %>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
+                                    <button class="btn btn-success text-white col-12" type="submit">Ajouter</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -218,64 +257,46 @@ ResultSet rs,rs1;
                   }
               </script>
 
-            <div class="modal" id="UpdateFormation">
+            <div class="modal" id="UpdateModule">
                 <div class="modal-dialog">
                   <div class="modal-content">
                   
                     <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Modifier DonnÃ©es Etudiant</h4>
+                      <h4 class="modal-title mb-3">Modifier Module</h4>
                     </div>
                     
                     <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
+                    <form class="form-horizontal form-material mx-3" action="./modify" method="post">
+                    <input type="hidden" name="action" value="6">
+                    <input type="hidden" name="id_module" id="id_module" value="">
                         <div class="form-group ">
-                            <div class="row align-content-between mx-3">
-                                <div class="col-sm-6 p-l-0" >
-                                    <label for="nom-prof" class="col-12">Nom</label>
-                                    <input type="text" name="prenom-prof" id="prenom-prof" class="form-control form-control-line">
-                                </div>
-                                <div class="col-sm-6 p-r-0">
-                                    <label for="prenom-prof" class="col-12">Prenom</label>
-                                    <input name="prenom-prof" id="prenom-prof" type="text" class="form-control form-control-line">
-                                </div>
+                            <label for="NomMod" class="col-md-12 ">Nom</label>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder=""
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomMod">
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Email</label>
-                            <div class="col-sm-12">
-                                <input type="email" placeholder="nom@prenom.com"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Genre</label>
-                            <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
-                                    <option>Homme</option>
-                                    <option>Femme</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Adresse</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control form-control-line" 
-                                    rows="3"></textarea>
-                            </div>
-                          </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Niveau</label>
-                            <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
-                                    <option></option>
+                           <div class="form-group">
+                              <label class="col-sm-12 ">Formation</label>
+                              <div class="col-sm-12">
+                                 <select class="form-select shadow-none form-control-line" name="id_formation">
+
+                                <%
+                                con = (new ConnectionProvider()).getConnection();
+                           		preparedStatement = con.prepareStatement("SELECT * FROM formation ");
+                           		rs = preparedStatement.executeQuery();
+                                while (rs.next()) {
+                                %>
+                                    <option value="<%=rs.getInt(1) %>"><%=capitalise(rs.getString(2)) %></option>
+                                   <%} %>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Valider</button>
+                                    <button class="btn btn-success text-white col-12" type="submit">Modifier</button>
                                 </div>
                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
@@ -287,21 +308,30 @@ ResultSet rs,rs1;
                   </div>
                 </div>
               </div>
-
+            <form action="./delete" id="delete" method="post">
+               <input type="hidden" name="action" value="6" >
+               <input type="hidden" name="del_id" id="del_id" value="">
+               <button type="submit" style="display: none;"></button>
+            </form>
               <script>
-                  function addUser(){
-                      
-                  }
+              function ModifyItem(id){
+                  document.getElementById('id_module').value = id;
+               }
+              function DeleteItem(id) {
+               document.getElementById('del_id').value = id;
+               document.getElementById('delete').submit();
+              }
               </script>
             <div class="container">
                     <ul class="nav nav-tabs">
  <%
-                                con = (new ConnectionProvider()).getConnection();
-                    			preparedStatement = con.prepareStatement("SELECT * FROM formation ");
-                    			rs = preparedStatement.executeQuery();
-                                while (rs.next()) {
+				int i = 0 ;
+                con = (new ConnectionProvider()).getConnection();
+           		preparedStatement = con.prepareStatement("SELECT * FROM formation ");
+           		rs = preparedStatement.executeQuery();
+                while (rs.next()) {
  %>
-                      <li class="active nav-item" role="presentation"><a data-toggle="tab" href="#u<%=rs.getInt(1)%>"><%=rs.getString(1) %></a></li><%} %>
+                      <li class="<%=i==0?"active":"" %> nav-item" role="presentation"><a data-toggle="tab" href="#u<%=rs.getInt(1)%>" id="<%=++i%>"><%=rs.getString(2) %></a></li><%} %>
                       <li>
                         <div class="text-center">
                           <a href="" class="btn btn-primary mb-0" style="padding: 10px" data-toggle="modal" data-target="#AddElement">Ajouter Element</a>
@@ -309,66 +339,7 @@ ResultSet rs,rs1;
 
                       </li>
                       <li>
-                          <div class="modal" id="AddUser">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                              
-                                <!-- Modal Header -->
-                                <div class="modal-header p-5 text-center bg-light">
-                                  <h4 class="modal-title mb-3">Ajouter Un Element</h4>
-                                </div>
-                                
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                   <form class="form-horizontal form-material mx-2">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Nom</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Nom</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Professeur</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Module</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-select shadow-none form-control-line">
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row col-sm-12">
-                                            <button class="btn btn-success text-white">Ajouter</button>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Quiter</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                </div>                                
-                              </div>
-                            </div>
-                          </div>
+                          
                         <div class="text-center">
                           <a href="" class="btn btn-primary mb-0" style="padding: 10px" data-toggle="modal" data-target="#AddModule">Ajouter Module</a>
                         </div>
@@ -378,11 +349,10 @@ ResultSet rs,rs1;
 
                     <div class="tab-content">
 <%
-                                con = (new ConnectionProvider()).getConnection();
-                    			preparedStatement = con.prepareStatement("SELECT id from formation");
-                    			rs = preparedStatement.executeQuery();
-                                while (rs.next()) {
-                                %>
+        			stat2 = con.prepareStatement("SELECT id from formation");
+        			rs = stat2.executeQuery();;
+                    while (rs.next()) {
+                    %>
                       <div id="u<%=rs.getInt(1)%>" class="tab-pane fade active" style="background-color: white;">
                         <div class="">
                           <div class="card  card-body">
@@ -397,30 +367,44 @@ ResultSet rs,rs1;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%
-                    			preparedStatement = con.prepareStatement("SELECT M.id , M.nom FROM module M join on formation F on F.id=M.id_form where F.id=?");
-                                preparedStatement.setInt(1,rs.getInt(1));
-                    			rs1 = preparedStatement.executeQuery();
-                                while (rs1.next()) {
-                                %>
+	                                <%
+	                                int j = 0 ;
+	                    			stat1 = con.prepareStatement("SELECT M.id , M.nom FROM module M join  formation F on F.id=M.id_form where F.id=?");
+	                                stat1.setInt(1,rs.getInt(1));
+	                    			rs1 = stat1.executeQuery();
+	                                while (rs1.next()) {
+	                                %>
                                     <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
+                                        <td><%=++j %></td>
+                                        <td><%=rs1.getString(2) %></td>
+			                              <td>
+			                                 <%
+			                                    int ID_mo =  rs1.getInt(1);    
+			                                    PreparedStatement set = con.prepareStatement("SELECT nom FROM element EL where id_module=?");
+			                                    set.setInt(1 , ID_mo);
+			                                    ResultSet rs2 = set.executeQuery();
+			                                    	while(rs2.next()){
+			                                    		out.write(capitalise(rs2.getString(1))+"<br/>");
+
+			                                    	}
+			                                    set.close();
+			                                    %>
+			                              </td>
+			                              			                              <td>
+			                                 <%
+			                                    set = con.prepareStatement("SELECT ES.nom,ES.prenom FROM enseignant ES join vacation V on V.id_ens=ES.id join element EL on v.id_elem=EL.id WHERE EL.id_module=?");
+			                                    set.setInt(1 , ID_mo);
+			                                    rs2 = set.executeQuery();
+			                                    	while(rs2.next()){
+			                                    		out.write(capitalise(rs2.getString(1))+" "+ capitalise(rs2.getString(2)) +"<br/>");
+			                                    	}
+			                                    %>
+			                              </td>
+                                        <td class="text-center"><i  href="" class="btn material-icons" onclick="ModifyItem(<%=rs1.getInt(1) %>)" data-toggle="modal" data-target="#UpdateModule">create</i></td>
+                                        <td class="text-center"><i  href="" class="btn material-icons" onclick="DeleteItem(<%=rs1.getInt(1) %>)" data-toggle="modal">delete</i></td>
                                     </tr>
                                 <%
                                 }%>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" >delete</i></td>
-                                    </tr>
                                     
                                 </tbody>
                             </table>
@@ -429,52 +413,8 @@ ResultSet rs,rs1;
                       </div>
 <%
 }%>
-<!-- 
-                      <div id="u2" class="tab-pane fade" style="background-color: white;">
-                        <div class="">
-                           <div class="card" style="padding: 20px">
-                               <table class="my-table-bordred table-bordered col-12">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">Element</th>
-                                        <th scope="col">Proesseur</th>
-                                        <th  class="col-1" colspan=2><center>Action </center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateStudnent">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateStudnent">delete</i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                           </div>
-                        </div>
-                      </div>
+
                     </div>
--->
             </div>
         </div>
             <footer class="footer text-center">
@@ -501,13 +441,9 @@ ResultSet rs,rs1;
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <script type="text/javascript">
-    $('.nav-tabs a[href="#u1"]').tab('show')
-    $('.nav-tabs a').click(function(){
-      $(this).tab('show');
-    })
-    $('.nav-tabs a:first').tab('show')
-    $('.nav-tabs a:last').tab('show')
-    $('.nav-tabs li:eq(2) a').tab('show')
+    document.getElementById('2').click();
+    document.getElementById('1').click();
+
     </script>
 </body>
 

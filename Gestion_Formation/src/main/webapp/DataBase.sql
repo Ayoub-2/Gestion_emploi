@@ -1,10 +1,11 @@
 create table Rubrique(
-	ID 				SMALLINT,
-	-- ID_PEmp 			SMALLINT,
-	Libelle 			varchar(512),
-	constraint PK_RUB primary key(ID)
-	-- constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
+    ID                 INT,
+    -- ID_PEmp             SMALLINT,
+    Libelle             varchar(512),
+    constraint PK_RUB primary key(ID)
+    -- constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
 );
+
 create table Niveau(
 	ID  SMALLINT,
 	nom varchar(30),
@@ -76,7 +77,6 @@ create table Enseignant(
 	prenom 		varchar(30),
 	email  		varchar(50),
 	type  		varchar(20),
-	salaire  	DECIMAL(9,3),
 	constraint PK_ENS primary key(ID),
 	constraint FK_ENS_GRADE foreign key(ID_grade) references Grade(ID),
 	constraint FK_ENS_DEP foreign key(ID_Dep) references Departement(ID)
