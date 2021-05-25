@@ -1,3 +1,4 @@
+<%@ page errorPage="error.jsp" %>  
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>

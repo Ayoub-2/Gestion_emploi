@@ -1,9 +1,15 @@
+<%@ page errorPage="error.jsp" %>  
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ page import="com.pfa.connectionProvide.*" %>
+<%
+   Connection con ;
+   PreparedStatement preparedStatement;
+   ResultSet rs,rs1;
+%>
 <!DOCTYPE html>
 <html dir="admin" lang="en" style="font-size: 17px">
 
@@ -118,42 +124,38 @@
                 </div>
             </div>
 
-            <div class="modal" id="AddFormation">
-                <div class="modal-dialog">
+            <div class="modal" id="AddGrade">
+               <div class="modal-dialog">
                   <div class="modal-content">
-                  
-                    <!-- Modal Header -->
-                    <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Ajouter Une Formation</h4>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
-                        <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Nom</label>
-                            <div class="col-sm-12">
-                                <input type="email" placeholder=""
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Ajouter</button>
-                                </div>
-                                <div class="col-sm-6 py-2 center-block">
+                     <div class="modal-header bg-light">
+                        <h4 class="modal-title mb-3">Ajouter Un Grade</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form class="form-horizontal form-material mx-2" action="./add"method="post">
+                           <input type="hidden" name="action" value="1">
+                           <div class="form-group py-10">
+                              <label for="NomGrade" class="col-md-12 p-l-25">Nom</label>
+                              <div class="col-sm-12">
+                                 <input type="text"
+                                    class="form-control form-control-line" name="nom"
+                                    id="NomGrade">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="row ">
+                                 <div class="col-sm-6  py-2 center-block ">
+                                    <button class="btn btn-success text-white col-12"  type="submit">Ajouter</button>
+                                 </div>
+                                 <div class="col-sm-6 py-2 center-block">
                                     <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    </div>                                
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
                   </div>
-                </div>
-              </div>
-
+               </div>
+            </div>
               <!------- Add User Script---------->
               <script>
                   function addUser(){
@@ -161,266 +163,99 @@
                   }
               </script>
 
-            <div class="modal" id="UpdateFormation">
-                <div class="modal-dialog">
+            <div class="modal" id="UpdateFomation">
+               <div class="modal-dialog">
                   <div class="modal-content">
-                  
-                    <div class="modal-header p-5 text-center bg-light">
-                      <h4 class="modal-title mb-3">Modifier DonnÃ©es Etudiant</h4>
-                    </div>
-                    
-                    <div class="modal-body">
-                    <form class="form-horizontal form-material mx-3">
-                        <div class="form-group ">
-                            <div class="row align-content-between mx-3">
-                                <div class="col-sm-6 p-l-0" >
-                                    <label for="nom-prof" class="col-12">Nom</label>
-                                    <input type="text" name="prenom-prof" id="prenom-prof" class="form-control form-control-line">
-                                </div>
-                                <div class="col-sm-6 p-r-0">
-                                    <label for="prenom-prof" class="col-12">Prenom</label>
-                                    <input name="prenom-prof" id="prenom-prof" type="text" class="form-control form-control-line">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="example-email" class="col-md-12 ">Email</label>
-                            <div class="col-sm-12">
-                                <input type="email" placeholder="nom@prenom.com"
-                                    class="form-control form-control-line" name="example-email"
-                                    id="example-email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Genre</label>
-                            <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
-                                    <option>Homme</option>
-                                    <option>Femme</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Adresse</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control form-control-line" 
-                                    rows="3"></textarea>
-                            </div>
-                          </div>
-                        <div class="form-group">
-                            <label class="col-sm-12 ">Niveau</label>
-                            <div class="col-sm-12">
-                                <select class="form-select shadow-none form-control-line">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6  py-2 center-block ">
-                                    <button class="btn btn-success text-white col-12" onclick="addUser()">Valider</button>
-                                </div>
-                                <div class="col-sm-6 py-2 center-block">
-                                    <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    </div>                                
-                  </div>
-                </div>
-              </div>
-
-              <script>
-                  function addUser(){
-                      
-                  }
-              </script>
-            <div class="container">
-                    <ul class="nav nav-tabs">
-                      <li class="active nav-item" role="presentation"><a data-toggle="tab" href="#u1">Formation 1</a></li>
-                      <li class="nav-item" role="presentation"><a data-toggle="tab" href="#u2">Formation 2</a></li>
-                      <li>
-                          <div class="modal" id="AddUser">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                              
-                                <!-- Modal Header -->
-                                <div class="modal-header p-5 text-center bg-light">
-                                  <h4 class="modal-title mb-3">Ajouter Un Formation</h4>
-                                </div>
-                                
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                   <form class="form-horizontal form-material mx-2">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Nom</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Mot de passe</label>
-                                        <div class="col-md-12">
-                                            <input type="password" value="password"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Phone No</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Addresse</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Role</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-select shadow-none form-control-line">
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row col-sm-12">
-                                            <button class="btn btn-success text-white">Ajouter</button>
-                                        </div>
-                                        <div class="row col-sm-12">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Quiter</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                </div>                                
+                     <div class="modal-header bg-light">
+                        <h4 class="modal-title mb-3">Modifier DonnÃ©es Grade</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form class="form-horizontal form-material mx-2" action="./modify" method="post">
+                           <input type="hidden" name="action" value="8">
+                           <input type="hidden" name="id_form" id="id_form" value="">
+                           <div class="form-group py-10">
+                              <label for="" class="col-md-12 p-l-25">Nom</label>
+                              <div class="col-sm-12">
+                                 <input type="text"
+                                    class="form-control form-control-line" name="nom"
+                                    id="">
                               </div>
-                            </div>
-                          </div>
-                        <div class="text-center">
-                          <a href="" class="btn btn-primary mb-0" style="padding: 10px" data-toggle="modal" data-target="#AddFormation">Ajouter Formation</a>
-                        </div>
-
-
-                      </li>
-                    </ul>
-
-                    <div class="tab-content">
-                      <div id="u1" class="tab-pane fade active" style="background-color: white;">
-                        <div class="">
-                          <div class="card  card-body">
-                           <table class="my-table-bordred table-bordered col-12">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
-                                        <th scope="col">Genre</th>
-                                        <th scope="col">Adresse</th>
-                                        <th  class="col-1" colspan=2><center>Action </center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateFormation">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" >delete</i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
                            </div>
-                        </div>
-                      </div>
-                      <div id="u2" class="tab-pane fade" style="background-color: white;">
-                        <div class="">
-                           <div class="card" style="padding: 20px">
-                               <table class="my-table-bordred table-bordered col-12">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Adresse</th>
-                                        <th  class="col-1" colspan=2><center>Action </center></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateProf">delete</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td>Cell</td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateStudnent">create</i></td>
-                                        <td class="text-center"><i  href="" class="btn material-icons" data-toggle="modal" data-target="#UpdateStudnent">delete</i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                           <div class="form-group py-10">
+                              <label class="col-md-12 p-l-25">Frais formation</label>
+                              <div class="col-sm-12">
+                                 <input type="text"
+                                    class="form-control form-control-line" name="frais"
+                                    >
+                              </div>
                            </div>
-                        </div>
-                      </div>
-                    </div>
-
+                           <div class="form-group">
+                              <div class="row ">
+                                 <div class="col-sm-6  py-2 center-block ">
+                                    <button class="btn btn-success text-white col-12" type="submit" >Valider</button>
+                                 </div>
+                                 <div class="col-sm-6 py-2 center-block">
+                                    <button type="button" class="btn btn-danger col-12" data-dismiss="modal">Quiter</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
+            <form action="./delete" id="delete" method="post">
+               <input type="hidden" name="action" value="1" >
+               <input type="hidden" name="del_id" id="del_id" value="">
+               <button type="submit" style="display: none;"></button>
+            </form>
+            <script>
+               function ModifyItem(id){
+                   document.getElementById('id_form').value = id;
+                }
+               function DeleteItem(id) {
+                document.getElementById('del_id').value = id;
+                document.getElementById('delete').submit();
+               }
+            </script>
+             <div class="container-fluid">
+               <div class="col-12">
+                  <div class="card" style="padding: 20px">
+                     <table class="my-table-bordred table-bordered col-12">
+                        <thead>
+                           <tr>
+                              <th class="col-1">#</th>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Frais inscription</th>
+                              <th scope="col">URL</th>
+                              <th  class="col-1" colspan=2>
+                                 <center>Action</center>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <%
+                              con = (new ConnectionProvider()).getConnection();
+                              preparedStatement = con.prepareStatement("SELECT * FROM formation ");
+                              rs = preparedStatement.executeQuery();
+                              int i = 0 ;
+                              while (rs.next()) {
+                              %>
+                           <tr>
+                              <td><%=++i %></td>
+                              <td><%=rs.getString(2) %></td>
+                              <td><%=rs.getString(3) %></td>
+                              <td><a href="http://localhost:8088/Gestion_Formation/coordonnateur/tableformation?form=<%=rs.getInt(1)%>">lien programme emploi</a></td>
+                              <td class="text-center"><i  href="" onclick="ModifyItem(<%=rs.getInt(1) %>)" class="btn material-icons" data-toggle="modal" data-target="#UpdateGrade">create</i></td>
+                              <td class="text-center"><i href="javascript:;" onclick="DeleteItem(<%=rs.getInt(1) %>)" class="btn material-icons">delete</i></td>
+                           </tr>
+                           <%} %>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            
             <footer class="footer text-center">
                 All Rights Reserved by Ensias. Designed and Developed by <a
                     href="https://www.PFA.com">PFA-Boubekri-Bouallal</a>.
