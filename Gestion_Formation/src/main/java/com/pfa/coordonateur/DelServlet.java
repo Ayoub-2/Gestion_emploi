@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import com.pfa.connectionProvide.ConnectionProvider;
 
-@WebServlet("/coordonnateur/delete")
+@WebServlet("/coordonnateur/delete1")
 
 public class DelServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 

@@ -13,7 +13,7 @@ public String capitalise(String str) {
 }
 %>
 <%
-	 Connection con ;
+   Connection con ;
    PreparedStatement preparedStatement;
    ResultSet rs,rs1;
    int id_form = (Integer) request.getAttribute("name");

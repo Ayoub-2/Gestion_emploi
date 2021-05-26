@@ -19,13 +19,9 @@ import com.pfa.connectionProvide.ConnectionProvider;
 @WebServlet("/coordonnateur/tableformation")
 public class ShowServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-		try {
 		int id_form = Integer.parseInt(request.getParameter("form"));
 		request.setAttribute("name", id_form);
 		RequestDispatcher rd=request.getRequestDispatcher("./table-emploi.jsp");
         rd.include(request,response);
-		} catch (NumberFormatException e) {
-			response.sendRedirect("./error.jsp");
-		}
 	}
 }

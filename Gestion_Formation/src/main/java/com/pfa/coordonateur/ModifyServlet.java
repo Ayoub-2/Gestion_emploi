@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pfa.connectionProvide.ConnectionProvider;
 
-@WebServlet("/coordonnateur/modify")
+@WebServlet("/coordonnateur/modify1")
 public class ModifyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {  

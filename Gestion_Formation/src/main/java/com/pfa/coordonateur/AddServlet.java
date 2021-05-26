@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import com.pfa.connectionProvide.ConnectionProvider;
 
-@WebServlet("/coordonnateur/add")
+@WebServlet("/coordonnateur/add1")
 public class AddServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {  
