@@ -1,11 +1,8 @@
 create table Rubrique(
-    ID                 INT,
-    -- ID_PEmp             SMALLINT,
-    Libelle             varchar(512),
-    constraint PK_RUB primary key(ID)
-    -- constraint FK_RUB_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID)
+	ID 				INT,
+	Libelle 			varchar(512),
+	constraint PK_RUB primary key(ID)
 );
-
 create table Niveau(
 	ID  SMALLINT,
 	nom varchar(30),
@@ -44,7 +41,6 @@ create table Grade(
 create table Formation(
 	ID 					SMALLINT,
 	nom 			varchar(50),
-	fraisFormation 		DECIMAL(10,3),
 	constraint PK_Form primary key(ID)
 );
 
@@ -81,15 +77,25 @@ create table Enseignant(
 	constraint FK_ENS_GRADE foreign key(ID_grade) references Grade(ID),
 	constraint FK_ENS_DEP foreign key(ID_Dep) references Departement(ID)
 );
-
+create table coordonner (
+	id_ens 		SMALLINT ,
+	id_form 	SMALLINT ,
+	date_debut 	date ,
+	date_fin 	date ,
+	constraint PK_Cor primary key(id_ens , id_form),
+	constraint FK_ENS_COR foreign key(id_ens) references Enseignant(ID),
+	constraint FK_Form_COR foreign key(id_form) references Formation(ID)
+);
 create table Inscription(
 	ID_et  				SMALLINT,
 	ID_form  			SMALLINT,
 	anneeUniversitaire 	Date,
-	Niveau 				varchar(20),
+	Niveau 				smallint,
+	fraisFormation 		DECIMAL(10,3),
 	constraint PK_INS primary key(ID_et, ID_form),
 	constraint FK_INS_FORM foreign key(ID_form) references formation(ID),
-	constraint FK_INS_ETUD foreign key(ID_et) references Etudiant(ID)
+	constraint FK_INS_ETUD foreign key(ID_et) references Etudiant(ID),
+	constraint FK_INS_Niv foreign key(niveau) references  Niveau(ID)
 );
 
 create table paiement(
@@ -119,22 +125,19 @@ ADD CONSTRAINT FK_VAC_ENS foreign key(ID_ENS) references Enseignant(ID);
 ALTER TABLE Vacation
 add constraint FK_VAC_ELEM foreign key(ID_ELEM) references element(ID);
 --=======================================
-
 create table ProgrammeEmp(
 	ID 					SMALLINT,
 	ID_FORM 			SMALLINT NOT NULL,
-	ID_Responsable 		SMALLINT,
 	Intitule 			varchar(50),
 	Exercice 			date,
+	Date_Depot 			date,
 	constraint PK_Rub primary key(ID),
-	constraint FK_PEmp_Form foreign key(ID_FORM) references Formation(ID),
-	constraint FK_PEmp_RESPO foreign key(ID_Responsable) references enseignant(ID)
+	constraint FK_PEmp_Form foreign key(ID_FORM) references Formation(ID)
 );
 
-create table sortie(
+create table Sortie(
 	ID_Rub 						INT,
 	ID_PEmp 					SMALLINT,
-	Date_sortie 				date,
 	montant 					DECIMAL(10,4),
 	constraint PK_SORT primary key(ID_Rub,ID_PEmp),
 	constraint FK_SORT_PEmp foreign key(ID_PEmp) references ProgrammeEmp(ID),
@@ -148,86 +151,117 @@ create table Dates(
 	constraint PK_DATE primary key(ID),
 	constraint 	FK_DATE_VAC foreign key(ID_VAC) references vacation(ID)
 );
+
+CREATE TABLE role (
+	id 			smallint primary key, -- agent|admin|Comptable
+	designation varchar(100)
+);
+
+CREATE TABLE Admin (
+	id 			int unsigned AUTO_INCREMENT,
+	id_role 	smallint,
+	nom 		varchar(50),
+	pass 		varchar(50),
+	telephone 	varchar(30),
+	adresse 	varchar(255),
+	email 		varchar(255),
+	PRIMARY KEY (id),
+	constraint 	FK_UTILIS_ROLE foreign key(id_role) references role(ID)
+);
+
+create table Valide (
+	id_admin 		 INT unsigned,
+	id_emp 		 	 SMALLINT ,
+	status 			 varchar(20) , -- en cours | validé | rejeté
+	date_validation  date ,
+	observation      varchar(255),
+	constraint PK_Val primary key (id_admin,id_emp),
+	constraint FK_Emp_Val foreign key (id_emp) references ProgrammeEmp(id),
+	constraint FK_Admin_Val foreign key (id_admin) references Admin(id)
+);
+
+
+
 --======================== INSERT Rubriques
 
 insert into rubrique values(9111009, "Personnel");
-insert into rubrique values(9111010, "IndemnitÃ©s et allocations ");
-insert into rubrique values(9111011, "IndemnitÃ©s complÃ©mentaires liÃ©es aux formations continues");
-insert into rubrique values(9111012, "IndemnitÃ©s brutes des enseignants et des experts Ã©trangers dans les domaines de la recherche scientifique et technologique, formations et travaux d'expertise");
-insert into rubrique values(9111013, "RÃ©munÃ©ration des post-doctorants travaillant dans le cadre de projets");
-insert into rubrique values(9111014, "RÃ©munÃ©ration des agents contractuels");
-insert into rubrique values(9111015, "RÃ©munÃ©ration des experts marocains et Ã©trangers");
+insert into rubrique values(9111010, "Indemnités et allocations ");
+insert into rubrique values(9111011, "Indemnités complémentaires liées aux formations continues");
+insert into rubrique values(9111012, "Indemnités brutes des enseignants et des experts étrangers dans les domaines de la recherche scientifique et technologique, formations et travaux d'expertise");
+insert into rubrique values(9111013, "Rémunération des post-doctorants travaillant dans le cadre de projets");
+insert into rubrique values(9111014, "Rémunération des agents contractuels");
+insert into rubrique values(9111015, "Rémunération des experts marocains et étrangers");
 insert into rubrique values(9111110, "Frais et redevances");
 insert into rubrique values(9111111, "Redevances pour brevets, marques, droits et valeurs similaires");
-insert into rubrique values(9111112, "Frais d'Ã©tudes, d'analyses et de sous-traltance");
-insert into rubrique values(9111113, "Frais de rÃ©alisation de maquettes et prototypes");
-insert into rubrique values(9111114, "Frais d'Ã©tudes et d'expertise");
+insert into rubrique values(9111112, "Frais d'études, d'analyses et de sous-traltance");
+insert into rubrique values(9111113, "Frais de réalisation de maquettes et prototypes");
+insert into rubrique values(9111114, "Frais d'études et d'expertise");
 insert into rubrique values(9111115, "Frais d'aconage et d'emmagasinage");
 insert into rubrique values(9111116, "Redevances d'eau");
-insert into rubrique values(9111117, "Redevances d'Ã©lectricitÃ©");
-insert into rubrique values(9111118, "Taxes et redevances de tÃ©lÃ©communications");
-insert into rubrique values(9111119, "Taxes et redevances pour l'utilisation de lignes ou rÃ©seaux spÃ©cialisÃ©s");
-insert into rubrique values(9111120, "SÃ©minaires, stages et formation");
+insert into rubrique values(9111117, "Redevances d'électricité");
+insert into rubrique values(9111118, "Taxes et redevances de télécommunications");
+insert into rubrique values(9111119, "Taxes et redevances pour l'utilisation de lignes ou réseaux spécialisés");
+insert into rubrique values(9111120, "Séminaires, stages et formation");
 insert into rubrique values(9111121, "Frais de formation");
-insert into rubrique values(9111122, "Frais de stages et de sÃ©minaires");
-insert into rubrique values(9111123, "Frais de participation aux sÃ©minaires, congrÃ©s et colloques");
-insert into rubrique values(9111124, "Frais de participation et d'inscription aux colloques, sÃ©minaires et concours pour le personnel et les Ã©tudiants chercheurs");
-insert into rubrique values(9111125, "Frais d'organisation de colloques et de sÃ©minaires");
-insert into rubrique values(9111126, "Frais d'hÃ©bergement et de restauration");
-insert into rubrique values(9111127, "Frais de rÃ©ception et de cÃ©rÃ©monies officielles");
+insert into rubrique values(9111122, "Frais de stages et de séminaires");
+insert into rubrique values(9111123, "Frais de participation aux séminaires, congrés et colloques");
+insert into rubrique values(9111124, "Frais de participation et d'inscription aux colloques, séminaires et concours pour le personnel et les étudiants chercheurs");
+insert into rubrique values(9111125, "Frais d'organisation de colloques et de séminaires");
+insert into rubrique values(9111126, "Frais d'hébergement et de restauration");
+insert into rubrique values(9111127, "Frais de réception et de cérémonies officielles");
 insert into rubrique values(9111128, "Frais de distributions des prix");
-insert into rubrique values(9111130, "Achat d'ouvrage, frais d'Ã©dition");
+insert into rubrique values(9111130, "Achat d'ouvrage, frais d'édition");
 insert into rubrique values(9111131, "Abonnements et documentation");
-insert into rubrique values(9111132, "Achat d'ouvrages pour la bibliothÃ¨que");
+insert into rubrique values(9111132, "Achat d'ouvrages pour la bibliothèque");
 insert into rubrique values(9111133, "Frais de reliure");
 insert into rubrique values(9111134, "Annonces et insertions");
-insert into rubrique values(9111135, "Frais de dÃ©monstration et de publicitÃ©");
+insert into rubrique values(9111135, "Frais de démonstration et de publicité");
 insert into rubrique values(9111136, "Frais de participation aux foires et expositions");
 insert into rubrique values(9111137, "Publications et impressions");
-insert into rubrique values(9111140, "AmÃ©nagement, entretien et Ã©quipement");
-insert into rubrique values(9111141, "Agencement, amÃ©nagement et installation");
-insert into rubrique values(9111142, "Etudes liÃ©es Ã   la construction et Ã   l'amÃ©nagement des bÃ timents administratifs");
-insert into rubrique values(9111143, "Locations de bÃ timents administratifs et charges connexes");
-insert into rubrique values(9111144, "Entretien et rÃ©paration des bÃ timents pÃ©dagogiques et administratifs");
-insert into rubrique values(9111145, "Entretien et rÃ©paration du mobilier, du matÃ©riel de bureau et du matÃ©riel d'impression");
+insert into rubrique values(9111140, "Aménagement, entretien et équipement");
+insert into rubrique values(9111141, "Agencement, aménagement et installation");
+insert into rubrique values(9111142, "Etudes liées à  la construction et à  l'aménagement des bàtiments administratifs");
+insert into rubrique values(9111143, "Locations de bàtiments administratifs et charges connexes");
+insert into rubrique values(9111144, "Entretien et réparation des bàtiments pédagogiques et administratifs");
+insert into rubrique values(9111145, "Entretien et réparation du mobilier, du matériel de bureau et du matériel d'impression");
 insert into rubrique values(9111150, "Achat de fournitures");
-insert into rubrique values(9111151, "Achats de petit outillage et pet Ã©quipement");
+insert into rubrique values(9111151, "Achats de petit outillage et pet équipement");
 insert into rubrique values(9111152, "Achat de fournitures informatiques");
 insert into rubrique values(9111153, "Achat de fournitures et de produits pour les travaux de terrain et de laboratoire");
-insert into rubrique values(9111154, "Achat de fournitures de bureau, papetrie et imprimÃ©s");
-insert into rubrique values(9111155, "Achat de matiÃ¨res premiÃ¨res");
+insert into rubrique values(9111154, "Achat de fournitures de bureau, papetrie et imprimés");
+insert into rubrique values(9111155, "Achat de matières premières");
 insert into rubrique values(9111156, "Achat d'animaux de laboratoire");
 insert into rubrique values(9111157, "Achat de produits pharmaceutiques");
 insert into rubrique values(9111158, "Achat de carburants et lubrifiants");
-insert into rubrique values(9111160, "Transports et dÃ©placements");
-insert into rubrique values(9111161, "Frais de transport du personnel et des Ã©tudiants Ã   l'Ã©tranger");
-insert into rubrique values(9111162, "Frais de mission Ã   l'Ã©tranger des participants");
-insert into rubrique values(9111163, "Frais de transport du personnel et des Ã©tudiants au Maroc");
-insert into rubrique values(9111164, "Frais de transport du mobilier et du matÃ©riel");
-insert into rubrique values(9111165, "Frais de transport et de sÃ©jour des missionnaires et chercheurs Ã©trangers");
-insert into rubrique values(9111166, "IndemnitÃ©s de dÃ©placement Ã   l'intÃ©rieur du Royaume");
-insert into rubrique values(9111167, "IndemnitÃ©s de dÃ©placement Ã   l'intÃ©rieur du Royaume des nationaux et des non-rÃ©sidents");
-insert into rubrique values(9111168, "IndemnitÃ©s de mission Ã   l'Ã©tranger");
-insert into rubrique values(9111169, "IndemnitÃ©s KlomÃ©triques");
-insert into rubrique values(9111170, "MatÃ©riel et mobilier");
-insert into rubrique values(9111171, "Achat de matÃ©riel d'enseignement");
-insert into rubrique values(9111172, "Achat de matÃ©riel technique, scientifique et audiovisuel");
-insert into rubrique values(9111173, "Achat de matÃ©riel informatique et logiciels et de matÃ©riel d'atelier et de l'outilage");
-insert into rubrique values(9111174, "Achat de matÃ©riel mÃ©dical");
-insert into rubrique values(9111175, "Achat de matÃ©riel et mobilier de bureau");
+insert into rubrique values(9111160, "Transports et déplacements");
+insert into rubrique values(9111161, "Frais de transport du personnel et des étudiants à  l'étranger");
+insert into rubrique values(9111162, "Frais de mission à  l'étranger des participants");
+insert into rubrique values(9111163, "Frais de transport du personnel et des étudiants au Maroc");
+insert into rubrique values(9111164, "Frais de transport du mobilier et du matériel");
+insert into rubrique values(9111165, "Frais de transport et de séjour des missionnaires et chercheurs étrangers");
+insert into rubrique values(9111166, "Indemnités de déplacement à  l'intérieur du Royaume");
+insert into rubrique values(9111167, "Indemnités de déplacement à  l'intérieur du Royaume des nationaux et des non-résidents");
+insert into rubrique values(9111168, "Indemnités de mission à  l'étranger");
+insert into rubrique values(9111169, "Indemnités Klométriques");
+insert into rubrique values(9111170, "Matériel et mobilier");
+insert into rubrique values(9111171, "Achat de matériel d'enseignement");
+insert into rubrique values(9111172, "Achat de matériel technique, scientifique et audiovisuel");
+insert into rubrique values(9111173, "Achat de matériel informatique et logiciels et de matériel d'atelier et de l'outilage");
+insert into rubrique values(9111174, "Achat de matériel médical");
+insert into rubrique values(9111175, "Achat de matériel et mobilier de bureau");
 insert into rubrique values(9111176, "Achat de mobilier d'enseignement et de laboratoire");
-insert into rubrique values(9111177, "Entretien et rÃ©paration du matÃ©riel d'enseignement et du matÃ©riel scientifique et de laboratoire");
-insert into rubrique values(9111178, "Entretien et rÃ©paration du matÃ©riel et outilage");
-insert into rubrique values(9111179, "Entretien et rÃ©paration de mobilier de bureau, de l'enseignement et de laboratoire");
-insert into rubrique values(9111180, "DÃ©penses diverses");
-insert into rubrique values(9111181, "Cotisation et contribution aux organismes nationaux et intÃ©rationaux");
+insert into rubrique values(9111177, "Entretien et réparation du matériel d'enseignement et du matériel scientifique et de laboratoire");
+insert into rubrique values(9111178, "Entretien et réparation du matériel et outilage");
+insert into rubrique values(9111179, "Entretien et réparation de mobilier de bureau, de l'enseignement et de laboratoire");
+insert into rubrique values(9111180, "Dépenses diverses");
+insert into rubrique values(9111181, "Cotisation et contribution aux organismes nationaux et intérationaux");
 insert into rubrique values(9111182, "Restiution et remboursement");
 insert into rubrique values(9111183, "Remboursement de la TVA et des Droits de douane");
 insert into rubrique values(9111184, "Taxes postales et frais d'affranchissement");
-insert into rubrique values(9111185, "Location de matÃ©riel de transport");
-insert into rubrique values(9111186, "PrÃ©lÃ¨vement 10% ENSIAS");
-insert into rubrique values(9111187, "PrÃ©lÃ¨vement 10% PrÃ©sidence");
-insert into rubrique values(9111190, "CrÃ©dit Ã   programmer");
+insert into rubrique values(9111185, "Location de matériel de transport");
+insert into rubrique values(9111186, "Prélèvement 10% ENSIAS");
+insert into rubrique values(9111187, "Prélèvement 10% Présidence");
+insert into rubrique values(9111190, "Crédit à  programmer");
 
 -- test inserts into grade
 
@@ -237,71 +271,83 @@ insert into grade values(3, "C");
 
 -- test inserts into enseignant
 
-insert into enseignant values(1001, 3, NULL, NULL, "Nabil", 	"Amri", 		"Nabil.Amri@mail.com", 			"interne", 1550.0);
-insert into enseignant values(1002, 2, NULL, NULL, "Amal", 		"Asrioui", 		"Amal.Asrioui@mail.com", 		"externe", 1300.0);
-insert into enseignant values(1003, 1, NULL, NULL, "Khalid", 	"Ben Hammou", 	"Khalid.BenHammou@mail.com", 	"interne", 1200.0);
-insert into enseignant values(1004, 1, NULL, NULL, "Jamal", 	"Talbi", 		"Jamal.Talbi@mail.com", 		"interne", 1000.0);
-insert into enseignant values(1005, 1, NULL, NULL, "Ziad", 		"Ait Salah", 	"Ziad.AitSalah@mail.com", 		"interne", 1100.0);
-insert into enseignant values(1006, 1, NULL, NULL, "Ilham", 	"Oufquir", 		"Ilham.Oufquir@mail.com", 		"externe", 1150.0);
-insert into enseignant values(1007, 3, NULL, NULL, "Mohammed", 	"Ajrioui", 		"Mohammed.Ajrioui@mail.com", 	"interne", 1400.0);
-insert into enseignant values(1008, 1, NULL, NULL, "Salma", 	"Al Hadi", 		"Salma.AlHadi@mail.com", 		"interne", 1200.0);	
-insert into enseignant values(1009, 3, NULL, NULL, "Manal", 	"Hamdi", 		"Manal.Hamdi@mail.com", 		"externe", 1550.0);
-insert into enseignant values(1010, 2, NULL, NULL, "Kaoutar", 	"Mehdaoui", 	"Kaoutar.Mehdaoui@mail.com", 	"interne", 1370.0);
-insert into enseignant values(1011, 2, NULL, NULL, "Imad", 		"Assfiri", 		"Imad.Assfiri@mail.com", 		"interne", 1300.0);
+insert into enseignant values(1001, 3, NULL, NULL, "Nabil", 	"Amri", 		"Nabil.Amri@mail.com", 			"interne");
+insert into enseignant values(1002, 2, NULL, NULL, "Amal", 		"Asrioui", 		"Amal.Asrioui@mail.com", 		"externe");
+insert into enseignant values(1003, 1, NULL, NULL, "Khalid", 	"Ben Hammou", 	"Khalid.BenHammou@mail.com", 	"interne");
+insert into enseignant values(1004, 1, NULL, NULL, "Jamal", 	"Talbi", 		"Jamal.Talbi@mail.com", 		"interne");
+insert into enseignant values(1005, 1, NULL, NULL, "Ziad", 		"Ait Salah", 	"Ziad.AitSalah@mail.com", 		"interne");
+insert into enseignant values(1006, 1, NULL, NULL, "Ilham", 	"Oufquir", 		"Ilham.Oufquir@mail.com", 		"externe");
+insert into enseignant values(1007, 3, NULL, NULL, "Mohammed", 	"Ajrioui", 		"Mohammed.Ajrioui@mail.com", 	"interne");
+insert into enseignant values(1008, 1, NULL, NULL, "Salma", 	"Al Hadi", 		"Salma.AlHadi@mail.com", 		"interne");	
+insert into enseignant values(1009, 3, NULL, NULL, "Manal", 	"Hamdi", 		"Manal.Hamdi@mail.com", 		"externe");
+insert into enseignant values(1010, 2, NULL, NULL, "Kaoutar", 	"Mehdaoui", 	"Kaoutar.Mehdaoui@mail.com", 	"interne");
+insert into enseignant values(1011, 2, NULL, NULL, "Imad", 		"Assfiri", 		"Imad.Assfiri@mail.com", 		"interne");
+
+-- test insert formation
+
+insert into formation values(123, "SSI");
+insert into formation values(124, "GL");
 
 -- test insert modules
 
 insert into module values(1, 123, "Algorithmique et programmation");
-insert into module values(2, 123, "Structures de donnÃ©es");
-insert into module values(3, 123, "Electronique numÃ©rique et circuits logiques");
+insert into module values(2, 123, "Structures de données");
+insert into module values(3, 123, "Electronique numérique et circuits logiques");
 insert into module values(4, 123, "Architecture des ordinateurs et microprocesseur");
-insert into module values(5, 123, "ElÃ©ments de recherche opÃ©rationnelle");
-insert into module values(6, 123, "ProbabilitÃ© appliquÃ©e");
-insert into module values(7, 123, "Gestion, Ã©conomie et finance 1");
+insert into module values(5, 123, "Eléments de recherche opérationnelle");
+insert into module values(6, 123, "Probabilité appliquée");
+insert into module values(7, 123, "Gestion, économie et finance 1");
 insert into module values(8, 123, "Langue et communication 1");
-insert into module values(9, 123, "Bases de donnÃ©es relationnelles");
-insert into module values(10, 123, "Informatiques thÃ©oriques");
-insert into module values(11, 123, "RÃ©seaux de communication");
-insert into module values(12, 123, "SystÃ¨mes dâ€™exploitation");
-insert into module values(13, 123, "Programmation orientÃ©e objet (POO)");
-insert into module values(14, 123, "Gestion, Ã©conomie et finance 2");
+insert into module values(9, 123, "Bases de données relationnelles");
+insert into module values(10, 123, "Informatiques théoriques");
+insert into module values(11, 123, "Réseaux de communication");
+insert into module values(12, 123, "Systèmes d’exploitation");
+insert into module values(13, 123, "Programmation orientée objet (POO)");
+insert into module values(14, 123, "Gestion, économie et finance 2");
 insert into module values(15, 123, "Langues et communication 2");
-insert into module values(16, 123, "Projet de fin de premiÃ¨re annÃ©e");
+insert into module values(16, 123, "Projet de fin de première année");
 
 -- test insert elements
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(1, 1002, 1,"Algorithmique");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(1, 1006, 2,"Techniques de programmation");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(2, 1003, 3,"Structures de donnÃ©es");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(2, 1007, 4,"Projet de programmation");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(3, 1001, 5,"Circuits logiques");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(3, 1007, 6,"Electronique numÃ©rique");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(4, 1008, 7,"Assembleur microprocesseur");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(4, 1008, 8,"Architecture des ordinateurs");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(5, 1001, 9,"ThÃ©orie des graphes");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(5, 1005, 10,"Programmation linÃ©aire");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(6, 1010, 11,"ProbabilitÃ©");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(6, 1006, 12,"Simulation des comportements probabilistes");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(7, 1004, 13,"Economie dâ€™entreprise");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(7, 1003, 14,"Introduction au management de lâ€™entreprise");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(7, 1004, 15,"ComptabilitÃ© gÃ©nÃ©rale et gestion financiÃ¨re");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(8, 1008, 16,"Communication interpersonnelle");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(8, 1009, 17,"General english I");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(9, 1011, 18,"Bases de donnÃ©es relationnelles");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(9, 1002, 19,"Programmation procÃ©durale de BD");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(10, 1005, 20,"ThÃ©orie des langages");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(10, 1006, 21,"CalculabilitÃ© et complexitÃ©");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(10, 1007, 22,"Logique");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(11, 1005, 23,"Transmission de donnÃ©es");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(11, 1004, 24,"RÃ©seaux informatiques");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(12, 1003, 25,"SystÃ¨mes dâ€™exploitation");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(13, 1010, 26,"Paradigme objet");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(13, 1011, 27,"Programmation objet");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(14, 1006, 28,"Economie gÃ©nÃ©rale");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(14, 1011, 29,"ComptabilitÃ© analytique");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(15, 1003, 30,"Communication professionnelle");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(15, 1005, 31,"General english II");
-insert into element(ID_MODULE, ID_ENS, ID, nom) values(16, 1004, 32,"Projet de fin de premiÃ¨re annÃ©e");
+insert into element(ID_MODULE, ID, nom) values(1, 1,"Algorithmique");
+insert into element(ID_MODULE, ID, nom) values(1, 2,"Techniques de programmation");
+insert into element(ID_MODULE, ID, nom) values(2, 3,"Structures de données");
+insert into element(ID_MODULE, ID, nom) values(2, 4,"Projet de programmation");
+insert into element(ID_MODULE, ID, nom) values(3, 5,"Circuits logiques");
+insert into element(ID_MODULE, ID, nom) values(3, 6,"Electronique numérique");
+insert into element(ID_MODULE, ID, nom) values(4, 7,"Assembleur microprocesseur");
+insert into element(ID_MODULE, ID, nom) values(4, 8,"Architecture des ordinateurs");
+insert into element(ID_MODULE, ID, nom) values(5, 9,"Théorie des graphes");
+insert into element(ID_MODULE, ID, nom) values(5, 10,"Programmation linéaire");
+insert into element(ID_MODULE, ID, nom) values(6, 11,"Probabilité");
+insert into element(ID_MODULE, ID, nom) values(6, 12,"Simulation des comportements probabilistes");
+insert into element(ID_MODULE, ID, nom) values(7, 13,"Economie d’entreprise");
+insert into element(ID_MODULE, ID, nom) values(7, 14,"Introduction au management de l’entreprise");
+insert into element(ID_MODULE, ID, nom) values(7, 15,"Comptabilité générale et gestion financière");
+insert into element(ID_MODULE, ID, nom) values(8, 16,"Communication interpersonnelle");
+insert into element(ID_MODULE, ID, nom) values(8, 17,"General english I");
+insert into element(ID_MODULE, ID, nom) values(9, 18, "Bases de données relationnelles");
+insert into element(ID_MODULE, ID, nom) values(9, 19, "Programmation procédurale de BD");
+insert into element(ID_MODULE, ID, nom) values(10, 20,"Théorie des langages");
+insert into element(ID_MODULE, ID, nom) values(10, 21,"Calculabilité et complexité");
+insert into element(ID_MODULE, ID, nom) values(10, 22,"Logique");
+insert into element(ID_MODULE, ID, nom) values(11, 23,"Transmission de données");
+insert into element(ID_MODULE, ID, nom) values(11, 24,"Réseaux informatiques");
+insert into element(ID_MODULE, ID, nom) values(12, 25,"Systèmes d’exploitation");
+insert into element(ID_MODULE, ID, nom) values(13, 26,"Paradigme objet");
+insert into element(ID_MODULE, ID, nom) values(13, 27,"Programmation objet");
+insert into element(ID_MODULE, ID, nom) values(14, 28,"Economie générale");
+insert into element(ID_MODULE, ID, nom) values(14, 29,"Comptabilité analytique");
+insert into element(ID_MODULE, ID, nom) values(15, 30,"Communication professionnelle");
+insert into element(ID_MODULE, ID, nom) values(15, 31,"General english II");
+insert into element(ID_MODULE, ID, nom) values(16, 32,"Projet de fin de première année");
 
+
+
+
+-- insert role 
+
+insert into role (1 , "Administrateur");
+insert into role (2 , "Comptable");
 
 
 -- insert niveaux
@@ -325,8 +371,71 @@ insert into etudiant values(10004, 1, "Najat", "Hassoun", 	"Najat.Hassoun@mail.c
 insert into etudiant values(10005, 2, "Hamza", "Ait Baha", 	"Hamza.AitBaha@mail.com", "masculin", "adresse");
 insert into etudiant values(10006, 2, "Kamal", "Bouzekri", 	"Kamal.Bouzekri@mail.com", "masculin", "adresse");
 insert into etudiant values(10007, 1, "Rabab", "Ben Sliman", 	"Rabab.BenSliman@mail.com", "Feminin", "adresse");
+insert into etudiant values(10008, 1, "Jihad", "Slimani", 	"Jihad.Slimani@mail.com", "Feminin", "adresse");
+insert into etudiant values(10009, 2, "Amal", "Benjebour", 	"Amal.Benjebour@mail.com", "Feminin", "adresse");
 insert into etudiant values(10011, 3, "Kaoutar", "Aarab", 	"Kaoutar.Aarab@mail.com", "Feminin", "adresse");
 insert into etudiant values(10022, 1, "Ayoub", "Bouallal", 	"Ayoub.Bouallal@mail.com", "masculin", "adresse");
 insert into etudiant values(10010, 2, "Hamza", "Boukacha", 	"Hamza.Boukacha@mail.com", "masculin", "adresse");
-insert into etudiant values(10008, 1, "Jihad", "Slimani", 	"Jihad.Slimani@mail.com", "Feminin", "adresse");
-insert into etudiant values(10009, 2, "Amal", "Benjebour", 	"Amal.Benjebour@mail.com", "Feminin", "adresse");
+
+insert into inscription values(10001 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10002 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10003 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10004 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10005 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10006 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10007 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10008 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10009 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+insert into inscription values(10011 , 123 , '2020-01-01'/*STR_TO_DATE("1-1-2020","%d-%m-%y")*/ , 1,  1000.000) ;
+
+
+insert into paiement values (1 , 1000.000 , 10001 , 123 , 'recu.txt' , "Observation" );
+insert into paiement values (2 , 1000.000 , 10002 , 123 , 'recu1.txt' , "Observation" );
+insert into paiement values (3 , 1000.000 , 10003 , 123 , 'recu2.txt' , "Observation" );
+insert into paiement values (4 , 1000.000 , 10004 , 123 , 'recu3.txt' , "Observation" );
+insert into paiement values (5 , 1000.000 , 10005 , 123 , 'recu4.txt' , "Observation" );
+insert into paiement values (6 , 1000.000 , 10006 , 123 , 'recu5.txt' , "Observation" );
+insert into paiement values (7 , 1000.000 , 10007 , 123 , 'recu6.txt' , "Observation" );
+insert into paiement values (8 , 1000.000 , 10008 , 123 , 'recu7.txt' , "Observation" );
+
+insert into Coordone values ();
+
+insert into ProgrammeEmp values (1 , 123 , "" , ""  , "2020-01-01" ) ;
+insert into ProgrammeEmp values (1 , 123 , "" , ""  , "2020-01-01" ) ;
+
+insert into Amind values ();
+insert into valide values () ;
+
+insert into vacation values(1001, 1002,  1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1002, 1006,  1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1003, 1003,  2, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1004, 1007,  2, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1005, 1001,  3, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1006, 1007,  3, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1007, 1008,  4, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1008, 1008,  4, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1009, 1001,  5, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1010, 1005,  5, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1011, 1010,  6, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1012, 1006,  6, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1013, 1004,  7, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1014, 1003,  7, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1015, 1004,  7, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1016, 1008,  8, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1017, 1009,  8, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1018, 1011,  9, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1019, 1002,  9, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1020, 1005, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1021, 1006, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1022, 1007, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1023, 1005, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1024, 1004, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1025, 1003, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1026, 1010, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1027, 1011, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1028, 1006, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1029, 1011, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1030, 1003, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1031, 1005, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+insert into vacation values(1032, 1004, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
