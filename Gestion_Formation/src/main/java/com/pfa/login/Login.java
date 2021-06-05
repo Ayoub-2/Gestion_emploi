@@ -8,7 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;  
 
 @WebServlet("/login")
 public class Login extends HttpServlet { 
@@ -21,7 +22,10 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
     String p=request.getParameter("userpass");
     boolean result = new LoginDao().validate(u, p);
     if(result){
-    	response.sendRedirect("admin/index.html"); 
+    	String name="Admin";
+    	HttpSession session= request.getSession(true);  
+        session.setAttribute("name",name);  
+    	response.sendRedirect("admin/index.jsp"); 
     }  
     else{  
         System.out.println("Sorry username or password error");  

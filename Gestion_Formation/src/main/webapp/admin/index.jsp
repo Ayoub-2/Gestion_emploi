@@ -1,3 +1,13 @@
+<%@page import="com.mysql.jdbc.Statement"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ page import="com.pfa.connectionProvide.*" %>
 <!DOCTYPE html>
 <html dir="admin" lang="en"  style="font-size: 17px">
 
@@ -128,7 +138,7 @@
                                                 <option value="0" selected>Mois</option>
                                                 <option value="1">Aujourd'hui</option>
                                                 <option value="2">Semaine</option>
-                                                <option value="3">Année</option>
+                                                <option value="3">AnnÃ©e</option>
                                             </select>
                                         </div>
                                     </div>

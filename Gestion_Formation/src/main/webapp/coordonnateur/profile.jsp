@@ -71,7 +71,7 @@
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="#" class="" id="Userdd" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">Steave Jobs <i
-                                                class=""></i></h5> <span class="op-5 user-email">Admin</span> </a>
+                                                class=""></i></h5> <span class="op-5 user-email">Coordonnateur</span> </a>
                                 </div>
                             </div>
                         </li>

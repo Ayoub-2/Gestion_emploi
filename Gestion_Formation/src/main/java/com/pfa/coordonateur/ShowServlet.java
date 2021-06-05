@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import com.pfa.connectionProvide.ConnectionProvider;
 
-@WebServlet("/coordonnateur/tableformation")
+@WebServlet("coordonnateur/tableformation")
 public class ShowServlet extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		int id_form = Integer.parseInt(request.getParameter("form"));
 		request.setAttribute("name", id_form);
 		RequestDispatcher rd=request.getRequestDispatcher("./table-emploi.jsp");

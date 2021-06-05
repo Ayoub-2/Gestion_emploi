@@ -9,7 +9,6 @@ create table Niveau(
 	constraint PK_NIV primary key(ID)
 );
 
-
 create table Vacation(
 	ID   				SMALLINT,
 	ID_ENS 				SMALLINT,
@@ -346,8 +345,8 @@ insert into element(ID_MODULE, ID, nom) values(16, 32,"Projet de fin de première
 
 -- insert role 
 
-insert into role (1 , "Administrateur");
-insert into role (2 , "Comptable");
+insert into role values(1 , 'Administrateur');
+insert into role values(2 , 'Comptable');
 
 
 -- insert niveaux
@@ -398,13 +397,14 @@ insert into paiement values (6 , 1000.000 , 10006 , 123 , 'recu5.txt' , "Observa
 insert into paiement values (7 , 1000.000 , 10007 , 123 , 'recu6.txt' , "Observation" );
 insert into paiement values (8 , 1000.000 , 10008 , 123 , 'recu7.txt' , "Observation" );
 
-insert into Coordone values ();
+insert into Coordonner values (1001 , 123 , NULL , NULL);
+insert into Coordonner values (1002 , 124 , NULL , NULL);
 
-insert into ProgrammeEmp values (1 , 123 , "" , ""  , "2020-01-01" ) ;
-insert into ProgrammeEmp values (1 , 123 , "" , ""  , "2020-01-01" ) ;
+insert into ProgrammeEmp values (1 , 123 , "" , NULL  , "2020-01-01" ) ;
+insert into ProgrammeEmp values (1 , 123 , "" , NULL  , "2020-01-01" ) ;
 
-insert into Amind values ();
-insert into valide values () ;
+insert into Admin values (1 , 1 , 'Admin' , SHA1('root') , NULL , NULL , NULL );
+insert into Admin values (2, 2 , 'Coordonnateur' , SHA1('cord') , NULL , NULL , NULL );
 
 insert into vacation values(1001, 1002,  1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 insert into vacation values(1002, 1006,  1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);

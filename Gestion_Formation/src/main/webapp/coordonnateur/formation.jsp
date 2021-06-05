@@ -85,7 +85,7 @@
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="#" class="" id="Userdd" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">Steave Jobs <i
-                                                class=""></i></h5> <span class="op-5 user-email">Admin</span> </a>
+                                                class=""></i></h5> <span class="op-5 user-email">Coordonnateur</span> </a>
                                 </div>
                             </div>
                         </li>
@@ -245,8 +245,8 @@
                               <td><%=++i %></td>
                               <td><%=rs.getString(2) %></td>
                               <td><%=rs.getString(3) %></td>
-                              <td><a href="http://localhost:8088/Gestion_Formation/coordonnateur/tableformation?form=<%=rs.getInt(1)%>">lien programme emploi</a></td>
-                              <td class="text-center"><i  href="" onclick="ModifyItem(<%=rs.getInt(1) %>)" class="btn material-icons" data-toggle="modal" data-target="#UpdateGrade">create</i></td>
+                              <td><a href="http://localhost:8088/Gestion_Formation/coordonnateur/tableformation?form=<%=rs.getInt(1)%>">Programme</a></td>
+                              <td class="text-center"><i  href="" onclick="ModifyItem(<%=rs.getInt(1) %>)" class="btn material-icons" data-toggle="modal" data-target="#UpdateFomation">create</i></td>
                               <td class="text-center"><i href="javascript:;" onclick="DeleteItem(<%=rs.getInt(1) %>)" class="btn material-icons">delete</i></td>
                            </tr>
                            <%} %>

@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Set;
 
-@WebServlet("coordonnateur/emploi")
+@WebServlet("/emploi")
 public class validerEmploi extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {  
