@@ -1,7 +1,7 @@
 # Introduction
 
-PFA project 1 year ENSIAS.
-Sujet : Fomations managament
+PFA project 1 year ENSIAS. 
+Subject : Fomations managament
 
 # Technologies :
 
